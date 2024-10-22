@@ -108,7 +108,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\libraries\wxWidgets-3.2.6\include\msvc;C:\libraries\wxWidgets-3.2.6\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\libraries\wxWidgets-3.2.6\include\msvc;C:\libraries\wxWidgets-3.2.6\include;C:\libraries\nlohmann;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -136,6 +136,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="App.h" />
+    <ClInclude Include="json.hpp" />
+    <ClInclude Include="RayUtils.h" />
     <ClInclude Include="RoundedButton.h" />
     <ClInclude Include="roundedRectangle.h" />
     <ClInclude Include="framework.h" />
@@ -152,6 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp" />
+    <ClCompile Include="RayUtils.cpp" />
     <ClCompile Include="RoundedButton.cpp" />
     <ClCompile Include="MainFrame.cpp" />
   </ItemGroup>

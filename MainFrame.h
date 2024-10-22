@@ -12,7 +12,7 @@ private:
     void OnTextChanged(wxCommandEvent& event);
     void OnPaint(wxPaintEvent& event);
 	void LoadPageContent(std::string page);
-    std::vector<std::string> split(const std::string& str, const std::string& delim);
+    //std::vector<std::string> split(const std::string& str, const std::string& delim);
     void Logic(int id);
 
     wxTextCtrl* m_textLeft;
