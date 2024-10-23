@@ -67,7 +67,6 @@ private:
             gc->SetBrush(wxBrush(buttonColor));
             //gc->DrawRoundedRectangle(0, 0, rect.width, rect.height, m_cornerRadius);
             gc->DrawRectangle(0, 0, rect.width, rect.height);
-
             // Draw text
             gc->SetFont(GetFont(), m_textColor);
             wxDouble textWidth, textHeight;

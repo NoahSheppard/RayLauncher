@@ -1,0 +1,531 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CMakeDetermineSystem.cmake:228 (message)"
+      - "CMakeLists.txt:72 (project)"
+    message: |
+      The target system is: Windows - 10.0.19045 - AMD64
+      The host system is: Windows - 10.0.19045 - AMD64
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:72 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+      Compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.39.33519/bin/Hostx64/x64/cl.exe 
+      Build flags: /nologo;/DWIN32;/D_WINDOWS;/W3;/utf-8;/MP
+      Id flags:  
+      
+      The output was:
+      0
+      CMakeCCompilerId.c
+      
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.exe"
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.obj"
+      
+      The C compiler identification is MSVC, found in:
+        C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/3.28.0-msvc1/CompilerIdC/CMakeCCompilerId.exe
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:1182 (message)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:247 (CMAKE_DETERMINE_MSVC_SHOWINCLUDES_PREFIX)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:72 (project)"
+    message: |
+      Detecting C compiler /showIncludes prefix:
+        main.c
+        Note: including file: C:\\Users\\Noah\\Desktop\\Files\\Programmioong\\C++\\FirstGui\\vcpkg_installed\\vcpkg\\blds\\curl\\x64-windows-dbg\\CMakeFiles\\ShowIncludes\\foo.h
+        
+      Found prefix "Note: including file: "
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CMakeDetermineCompilerABI.cmake:57 (try_compile)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:72 (project)"
+    checks:
+      - "Detecting C compiler ABI info"
+    directories:
+      source: "C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/CMakeScratch/TryCompile-91iuc7"
+      binary: "C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/CMakeScratch/TryCompile-91iuc7"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP "
+      CMAKE_C_FLAGS_DEBUG: "/D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1 "
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/src/url-8_10_1-c9ac109904.clean/CMake;"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: ""
+      CMAKE_MSVC_RUNTIME_LIBRARY: "MultiThreaded$<$<CONFIG:Debug>:Debug>$<$<STREQUAL:dynamic,dynamic>:DLL>"
+      VCPKG_APPLOCAL_DEPS: "OFF"
+      VCPKG_CHAINLOAD_TOOLCHAIN_FILE: "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg/scripts/toolchains/windows.cmake"
+      VCPKG_TARGET_ARCHITECTURE: "x64"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg"
+    buildResult:
+      variable: "CMAKE_C_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/CMakeScratch/TryCompile-91iuc7'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_76a84
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1439~1.335\\bin\\Hostx64\\x64\\cl.exe  /nologo   /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP   /D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1  -MDd /showIncludes /FoCMakeFiles\\cmTC_76a84.dir\\CMakeCCompilerABI.c.obj /FdCMakeFiles\\cmTC_76a84.dir\\ /FS -c "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.28\\Modules\\CMakeCCompilerABI.c"
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_76a84.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1439~1.335\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_76a84.dir\\CMakeCCompilerABI.c.obj  /out:cmTC_76a84.exe /implib:cmTC_76a84.lib /pdb:cmTC_76a84.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "CMake/Macros.cmake:50 (try_compile)"
+      - "CMakeLists.txt:176 (curl_internal_test)"
+    directories:
+      source: "C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/CMakeTmp"
+      binary: "C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP "
+      CMAKE_C_FLAGS_DEBUG: "/D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1 "
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/src/url-8_10_1-c9ac109904.clean/CMake;"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: ""
+      CMAKE_MSVC_RUNTIME_LIBRARY: "MultiThreaded$<$<CONFIG:Debug>:Debug>$<$<STREQUAL:dynamic,dynamic>:DLL>"
+      VCPKG_APPLOCAL_DEPS: "OFF"
+      VCPKG_CHAINLOAD_TOOLCHAIN_FILE: "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg/scripts/toolchains/windows.cmake"
+      VCPKG_TARGET_ARCHITECTURE: "x64"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg"
+    buildResult:
+      variable: "HAVE_WIN32_WINNT"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_88dc8
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1439~1.335\\bin\\Hostx64\\x64\\cl.exe  /nologo   /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP  -DHAVE_WIN32_WINNT /D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1  -MDd /showIncludes /FoCMakeFiles\\cmTC_88dc8.dir\\CurlTests.c.obj /FdCMakeFiles\\cmTC_88dc8.dir\\ /FS -c C:\\Users\\Noah\\Desktop\\Files\\Programmioong\\C++\\FirstGui\\vcpkg_installed\\vcpkg\\blds\\curl\\src\\url-8_10_1-c9ac109904.clean\\CMake\\CurlTests.c
+        _WIN32_WINNT=0x0A00
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_88dc8.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1439~1.335\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_88dc8.dir\\CurlTests.c.obj  /out:cmTC_88dc8.exe /implib:cmTC_88dc8.lib /pdb:cmTC_88dc8.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CheckIncludeFile.cmake:90 (try_compile)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CheckTypeSize.cmake:251 (check_include_file)"
+      - "CMakeLists.txt:1459 (check_type_size)"
+    checks:
+      - "Looking for stdint.h"
+    directories:
+      source: "C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/CMakeScratch/TryCompile-140gz4"
+      binary: "C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/CMakeScratch/TryCompile-140gz4"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP "
+      CMAKE_C_FLAGS_DEBUG: "/D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1 "
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/src/url-8_10_1-c9ac109904.clean/CMake;"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: ""
+      CMAKE_MSVC_RUNTIME_LIBRARY: "MultiThreaded$<$<CONFIG:Debug>:Debug>$<$<STREQUAL:dynamic,dynamic>:DLL>"
+      VCPKG_APPLOCAL_DEPS: "OFF"
+      VCPKG_CHAINLOAD_TOOLCHAIN_FILE: "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg/scripts/toolchains/windows.cmake"
+      VCPKG_TARGET_ARCHITECTURE: "x64"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg"
+    buildResult:
+      variable: "HAVE_STDINT_H"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/CMakeScratch/TryCompile-140gz4'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_eae05
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1439~1.335\\bin\\Hostx64\\x64\\cl.exe  /nologo  -IC:\\Users\\Noah\\Desktop\\Files\\Programmioong\\C++\\FirstGui\\vcpkg_installed\\x64-windows\\include /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP   /D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1  -MDd /showIncludes /FoCMakeFiles\\cmTC_eae05.dir\\CheckIncludeFile.c.obj /FdCMakeFiles\\cmTC_eae05.dir\\ /FS -c C:\\Users\\Noah\\Desktop\\Files\\Programmioong\\C++\\FirstGui\\vcpkg_installed\\vcpkg\\blds\\curl\\x64-windows-dbg\\CMakeFiles\\CMakeScratch\\TryCompile-140gz4\\CheckIncludeFile.c
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_eae05.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1439~1.335\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_eae05.dir\\CheckIncludeFile.c.obj  /out:cmTC_eae05.exe /implib:cmTC_eae05.lib /pdb:cmTC_eae05.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CheckTypeSize.cmake:146 (try_compile)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CheckTypeSize.cmake:271 (__check_type_size_impl)"
+      - "CMakeLists.txt:1459 (check_type_size)"
+    checks:
+      - "Check size of size_t"
+    directories:
+      source: "C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/CMakeScratch/TryCompile-g1et6k"
+      binary: "C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/CMakeScratch/TryCompile-g1et6k"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP "
+      CMAKE_C_FLAGS_DEBUG: "/D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1 "
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/src/url-8_10_1-c9ac109904.clean/CMake;"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: ""
+      CMAKE_MSVC_RUNTIME_LIBRARY: "MultiThreaded$<$<CONFIG:Debug>:Debug>$<$<STREQUAL:dynamic,dynamic>:DLL>"
+      VCPKG_APPLOCAL_DEPS: "OFF"
+      VCPKG_CHAINLOAD_TOOLCHAIN_FILE: "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg/scripts/toolchains/windows.cmake"
+      VCPKG_TARGET_ARCHITECTURE: "x64"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg"
+    buildResult:
+      variable: "HAVE_SIZEOF_SIZE_T"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/CMakeScratch/TryCompile-g1et6k'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_119fb
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1439~1.335\\bin\\Hostx64\\x64\\cl.exe  /nologo  -IC:\\Users\\Noah\\Desktop\\Files\\Programmioong\\C++\\FirstGui\\vcpkg_installed\\x64-windows\\include /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP   /D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1  -MDd /showIncludes /FoCMakeFiles\\cmTC_119fb.dir\\SIZEOF_SIZE_T.c.obj /FdCMakeFiles\\cmTC_119fb.dir\\ /FS -c C:\\Users\\Noah\\Desktop\\Files\\Programmioong\\C++\\FirstGui\\vcpkg_installed\\vcpkg\\blds\\curl\\x64-windows-dbg\\CMakeFiles\\CMakeScratch\\TryCompile-g1et6k\\SIZEOF_SIZE_T.c
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_119fb.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1439~1.335\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_119fb.dir\\SIZEOF_SIZE_T.c.obj  /out:cmTC_119fb.exe /implib:cmTC_119fb.lib /pdb:cmTC_119fb.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CheckTypeSize.cmake:146 (try_compile)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CheckTypeSize.cmake:271 (__check_type_size_impl)"
+      - "CMakeLists.txt:1460 (check_type_size)"
+    checks:
+      - "Check size of ssize_t"
+    directories:
+      source: "C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/CMakeScratch/TryCompile-lz7al4"
+      binary: "C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/CMakeScratch/TryCompile-lz7al4"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP "
+      CMAKE_C_FLAGS_DEBUG: "/D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1 "
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/src/url-8_10_1-c9ac109904.clean/CMake;"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: ""
+      CMAKE_MSVC_RUNTIME_LIBRARY: "MultiThreaded$<$<CONFIG:Debug>:Debug>$<$<STREQUAL:dynamic,dynamic>:DLL>"
+      VCPKG_APPLOCAL_DEPS: "OFF"
+      VCPKG_CHAINLOAD_TOOLCHAIN_FILE: "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg/scripts/toolchains/windows.cmake"
+      VCPKG_TARGET_ARCHITECTURE: "x64"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg"
+    buildResult:
+      variable: "HAVE_SIZEOF_SSIZE_T"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/CMakeScratch/TryCompile-lz7al4'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_56955
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1439~1.335\\bin\\Hostx64\\x64\\cl.exe  /nologo  -IC:\\Users\\Noah\\Desktop\\Files\\Programmioong\\C++\\FirstGui\\vcpkg_installed\\x64-windows\\include /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP   /D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1  -MDd /showIncludes /FoCMakeFiles\\cmTC_56955.dir\\SIZEOF_SSIZE_T.c.obj /FdCMakeFiles\\cmTC_56955.dir\\ /FS -c C:\\Users\\Noah\\Desktop\\Files\\Programmioong\\C++\\FirstGui\\vcpkg_installed\\vcpkg\\blds\\curl\\x64-windows-dbg\\CMakeFiles\\CMakeScratch\\TryCompile-lz7al4\\SIZEOF_SSIZE_T.c
+        FAILED: CMakeFiles/cmTC_56955.dir/SIZEOF_SSIZE_T.c.obj 
+        C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1439~1.335\\bin\\Hostx64\\x64\\cl.exe  /nologo  -IC:\\Users\\Noah\\Desktop\\Files\\Programmioong\\C++\\FirstGui\\vcpkg_installed\\x64-windows\\include /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP   /D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1  -MDd /showIncludes /FoCMakeFiles\\cmTC_56955.dir\\SIZEOF_SSIZE_T.c.obj /FdCMakeFiles\\cmTC_56955.dir\\ /FS -c C:\\Users\\Noah\\Desktop\\Files\\Programmioong\\C++\\FirstGui\\vcpkg_installed\\vcpkg\\blds\\curl\\x64-windows-dbg\\CMakeFiles\\CMakeScratch\\TryCompile-lz7al4\\SIZEOF_SSIZE_T.c
+        C:\\Users\\Noah\\Desktop\\Files\\Programmioong\\C++\\FirstGui\\vcpkg_installed\\vcpkg\\blds\\curl\\x64-windows-dbg\\CMakeFiles\\CMakeScratch\\TryCompile-lz7al4\\SIZEOF_SSIZE_T.c(29): error C2065: 'ssize_t': undeclared identifier
+        C:\\Users\\Noah\\Desktop\\Files\\Programmioong\\C++\\FirstGui\\vcpkg_installed\\vcpkg\\blds\\curl\\x64-windows-dbg\\CMakeFiles\\CMakeScratch\\TryCompile-lz7al4\\SIZEOF_SSIZE_T.c(30): error C2065: 'ssize_t': undeclared identifier
+        C:\\Users\\Noah\\Desktop\\Files\\Programmioong\\C++\\FirstGui\\vcpkg_installed\\vcpkg\\blds\\curl\\x64-windows-dbg\\CMakeFiles\\CMakeScratch\\TryCompile-lz7al4\\SIZEOF_SSIZE_T.c(31): error C2065: 'ssize_t': undeclared identifier
+        C:\\Users\\Noah\\Desktop\\Files\\Programmioong\\C++\\FirstGui\\vcpkg_installed\\vcpkg\\blds\\curl\\x64-windows-dbg\\CMakeFiles\\CMakeScratch\\TryCompile-lz7al4\\SIZEOF_SSIZE_T.c(32): error C2065: 'ssize_t': undeclared identifier
+        C:\\Users\\Noah\\Desktop\\Files\\Programmioong\\C++\\FirstGui\\vcpkg_installed\\vcpkg\\blds\\curl\\x64-windows-dbg\\CMakeFiles\\CMakeScratch\\TryCompile-lz7al4\\SIZEOF_SSIZE_T.c(33): error C2065: 'ssize_t': undeclared identifier
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CheckTypeSize.cmake:146 (try_compile)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CheckTypeSize.cmake:271 (__check_type_size_impl)"
+      - "CMakeLists.txt:1461 (check_type_size)"
+    checks:
+      - "Check size of long long"
+    directories:
+      source: "C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/CMakeScratch/TryCompile-mjog1b"
+      binary: "C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/CMakeScratch/TryCompile-mjog1b"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP "
+      CMAKE_C_FLAGS_DEBUG: "/D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1 "
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/src/url-8_10_1-c9ac109904.clean/CMake;"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: ""
+      CMAKE_MSVC_RUNTIME_LIBRARY: "MultiThreaded$<$<CONFIG:Debug>:Debug>$<$<STREQUAL:dynamic,dynamic>:DLL>"
+      VCPKG_APPLOCAL_DEPS: "OFF"
+      VCPKG_CHAINLOAD_TOOLCHAIN_FILE: "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg/scripts/toolchains/windows.cmake"
+      VCPKG_TARGET_ARCHITECTURE: "x64"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg"
+    buildResult:
+      variable: "HAVE_SIZEOF_LONG_LONG"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/CMakeScratch/TryCompile-mjog1b'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_f72fd
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1439~1.335\\bin\\Hostx64\\x64\\cl.exe  /nologo  -IC:\\Users\\Noah\\Desktop\\Files\\Programmioong\\C++\\FirstGui\\vcpkg_installed\\x64-windows\\include /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP   /D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1  -MDd /showIncludes /FoCMakeFiles\\cmTC_f72fd.dir\\SIZEOF_LONG_LONG.c.obj /FdCMakeFiles\\cmTC_f72fd.dir\\ /FS -c C:\\Users\\Noah\\Desktop\\Files\\Programmioong\\C++\\FirstGui\\vcpkg_installed\\vcpkg\\blds\\curl\\x64-windows-dbg\\CMakeFiles\\CMakeScratch\\TryCompile-mjog1b\\SIZEOF_LONG_LONG.c
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_f72fd.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1439~1.335\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_f72fd.dir\\SIZEOF_LONG_LONG.c.obj  /out:cmTC_f72fd.exe /implib:cmTC_f72fd.lib /pdb:cmTC_f72fd.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CheckTypeSize.cmake:146 (try_compile)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CheckTypeSize.cmake:271 (__check_type_size_impl)"
+      - "CMakeLists.txt:1462 (check_type_size)"
+    checks:
+      - "Check size of long"
+    directories:
+      source: "C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/CMakeScratch/TryCompile-9jw1p0"
+      binary: "C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/CMakeScratch/TryCompile-9jw1p0"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP "
+      CMAKE_C_FLAGS_DEBUG: "/D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1 "
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/src/url-8_10_1-c9ac109904.clean/CMake;"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: ""
+      CMAKE_MSVC_RUNTIME_LIBRARY: "MultiThreaded$<$<CONFIG:Debug>:Debug>$<$<STREQUAL:dynamic,dynamic>:DLL>"
+      VCPKG_APPLOCAL_DEPS: "OFF"
+      VCPKG_CHAINLOAD_TOOLCHAIN_FILE: "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg/scripts/toolchains/windows.cmake"
+      VCPKG_TARGET_ARCHITECTURE: "x64"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg"
+    buildResult:
+      variable: "HAVE_SIZEOF_LONG"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/CMakeScratch/TryCompile-9jw1p0'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_001d5
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1439~1.335\\bin\\Hostx64\\x64\\cl.exe  /nologo  -IC:\\Users\\Noah\\Desktop\\Files\\Programmioong\\C++\\FirstGui\\vcpkg_installed\\x64-windows\\include /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP   /D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1  -MDd /showIncludes /FoCMakeFiles\\cmTC_001d5.dir\\SIZEOF_LONG.c.obj /FdCMakeFiles\\cmTC_001d5.dir\\ /FS -c C:\\Users\\Noah\\Desktop\\Files\\Programmioong\\C++\\FirstGui\\vcpkg_installed\\vcpkg\\blds\\curl\\x64-windows-dbg\\CMakeFiles\\CMakeScratch\\TryCompile-9jw1p0\\SIZEOF_LONG.c
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_001d5.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1439~1.335\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_001d5.dir\\SIZEOF_LONG.c.obj  /out:cmTC_001d5.exe /implib:cmTC_001d5.lib /pdb:cmTC_001d5.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CheckTypeSize.cmake:146 (try_compile)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CheckTypeSize.cmake:271 (__check_type_size_impl)"
+      - "CMakeLists.txt:1463 (check_type_size)"
+    checks:
+      - "Check size of int"
+    directories:
+      source: "C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/CMakeScratch/TryCompile-cbm1qp"
+      binary: "C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/CMakeScratch/TryCompile-cbm1qp"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP "
+      CMAKE_C_FLAGS_DEBUG: "/D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1 "
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/src/url-8_10_1-c9ac109904.clean/CMake;"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: ""
+      CMAKE_MSVC_RUNTIME_LIBRARY: "MultiThreaded$<$<CONFIG:Debug>:Debug>$<$<STREQUAL:dynamic,dynamic>:DLL>"
+      VCPKG_APPLOCAL_DEPS: "OFF"
+      VCPKG_CHAINLOAD_TOOLCHAIN_FILE: "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg/scripts/toolchains/windows.cmake"
+      VCPKG_TARGET_ARCHITECTURE: "x64"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg"
+    buildResult:
+      variable: "HAVE_SIZEOF_INT"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/CMakeScratch/TryCompile-cbm1qp'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_16270
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1439~1.335\\bin\\Hostx64\\x64\\cl.exe  /nologo  -IC:\\Users\\Noah\\Desktop\\Files\\Programmioong\\C++\\FirstGui\\vcpkg_installed\\x64-windows\\include /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP   /D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1  -MDd /showIncludes /FoCMakeFiles\\cmTC_16270.dir\\SIZEOF_INT.c.obj /FdCMakeFiles\\cmTC_16270.dir\\ /FS -c C:\\Users\\Noah\\Desktop\\Files\\Programmioong\\C++\\FirstGui\\vcpkg_installed\\vcpkg\\blds\\curl\\x64-windows-dbg\\CMakeFiles\\CMakeScratch\\TryCompile-cbm1qp\\SIZEOF_INT.c
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_16270.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1439~1.335\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_16270.dir\\SIZEOF_INT.c.obj  /out:cmTC_16270.exe /implib:cmTC_16270.lib /pdb:cmTC_16270.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CheckTypeSize.cmake:146 (try_compile)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CheckTypeSize.cmake:271 (__check_type_size_impl)"
+      - "CMakeLists.txt:1464 (check_type_size)"
+    checks:
+      - "Check size of __int64"
+    directories:
+      source: "C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/CMakeScratch/TryCompile-wbb9oy"
+      binary: "C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/CMakeScratch/TryCompile-wbb9oy"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP "
+      CMAKE_C_FLAGS_DEBUG: "/D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1 "
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/src/url-8_10_1-c9ac109904.clean/CMake;"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: ""
+      CMAKE_MSVC_RUNTIME_LIBRARY: "MultiThreaded$<$<CONFIG:Debug>:Debug>$<$<STREQUAL:dynamic,dynamic>:DLL>"
+      VCPKG_APPLOCAL_DEPS: "OFF"
+      VCPKG_CHAINLOAD_TOOLCHAIN_FILE: "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg/scripts/toolchains/windows.cmake"
+      VCPKG_TARGET_ARCHITECTURE: "x64"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg"
+    buildResult:
+      variable: "HAVE_SIZEOF___INT64"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/CMakeScratch/TryCompile-wbb9oy'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_ec2f4
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1439~1.335\\bin\\Hostx64\\x64\\cl.exe  /nologo  -IC:\\Users\\Noah\\Desktop\\Files\\Programmioong\\C++\\FirstGui\\vcpkg_installed\\x64-windows\\include /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP   /D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1  -MDd /showIncludes /FoCMakeFiles\\cmTC_ec2f4.dir\\SIZEOF___INT64.c.obj /FdCMakeFiles\\cmTC_ec2f4.dir\\ /FS -c C:\\Users\\Noah\\Desktop\\Files\\Programmioong\\C++\\FirstGui\\vcpkg_installed\\vcpkg\\blds\\curl\\x64-windows-dbg\\CMakeFiles\\CMakeScratch\\TryCompile-wbb9oy\\SIZEOF___INT64.c
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_ec2f4.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1439~1.335\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_ec2f4.dir\\SIZEOF___INT64.c.obj  /out:cmTC_ec2f4.exe /implib:cmTC_ec2f4.lib /pdb:cmTC_ec2f4.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CheckTypeSize.cmake:146 (try_compile)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CheckTypeSize.cmake:271 (__check_type_size_impl)"
+      - "CMakeLists.txt:1465 (check_type_size)"
+    checks:
+      - "Check size of time_t"
+    directories:
+      source: "C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/CMakeScratch/TryCompile-k684uy"
+      binary: "C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/CMakeScratch/TryCompile-k684uy"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP "
+      CMAKE_C_FLAGS_DEBUG: "/D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1 "
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/src/url-8_10_1-c9ac109904.clean/CMake;"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: ""
+      CMAKE_MSVC_RUNTIME_LIBRARY: "MultiThreaded$<$<CONFIG:Debug>:Debug>$<$<STREQUAL:dynamic,dynamic>:DLL>"
+      VCPKG_APPLOCAL_DEPS: "OFF"
+      VCPKG_CHAINLOAD_TOOLCHAIN_FILE: "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg/scripts/toolchains/windows.cmake"
+      VCPKG_TARGET_ARCHITECTURE: "x64"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg"
+    buildResult:
+      variable: "HAVE_SIZEOF_TIME_T"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/CMakeScratch/TryCompile-k684uy'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_8cc48
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1439~1.335\\bin\\Hostx64\\x64\\cl.exe  /nologo  -IC:\\Users\\Noah\\Desktop\\Files\\Programmioong\\C++\\FirstGui\\vcpkg_installed\\x64-windows\\include /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP   /D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1  -MDd /showIncludes /FoCMakeFiles\\cmTC_8cc48.dir\\SIZEOF_TIME_T.c.obj /FdCMakeFiles\\cmTC_8cc48.dir\\ /FS -c C:\\Users\\Noah\\Desktop\\Files\\Programmioong\\C++\\FirstGui\\vcpkg_installed\\vcpkg\\blds\\curl\\x64-windows-dbg\\CMakeFiles\\CMakeScratch\\TryCompile-k684uy\\SIZEOF_TIME_T.c
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_8cc48.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1439~1.335\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_8cc48.dir\\SIZEOF_TIME_T.c.obj  /out:cmTC_8cc48.exe /implib:cmTC_8cc48.lib /pdb:cmTC_8cc48.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CheckTypeSize.cmake:146 (try_compile)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CheckTypeSize.cmake:271 (__check_type_size_impl)"
+      - "CMakeLists.txt:1570 (check_type_size)"
+    checks:
+      - "Check size of ADDRESS_FAMILY"
+    directories:
+      source: "C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/CMakeScratch/TryCompile-okn05b"
+      binary: "C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/CMakeScratch/TryCompile-okn05b"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP "
+      CMAKE_C_FLAGS_DEBUG: "/D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1 "
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/src/url-8_10_1-c9ac109904.clean/CMake;"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: ""
+      CMAKE_MSVC_RUNTIME_LIBRARY: "MultiThreaded$<$<CONFIG:Debug>:Debug>$<$<STREQUAL:dynamic,dynamic>:DLL>"
+      VCPKG_APPLOCAL_DEPS: "OFF"
+      VCPKG_CHAINLOAD_TOOLCHAIN_FILE: "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg/scripts/toolchains/windows.cmake"
+      VCPKG_TARGET_ARCHITECTURE: "x64"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg"
+    buildResult:
+      variable: "HAVE_SIZEOF_ADDRESS_FAMILY"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/CMakeScratch/TryCompile-okn05b'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_88380
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1439~1.335\\bin\\Hostx64\\x64\\cl.exe  /nologo  -IC:\\Users\\Noah\\Desktop\\Files\\Programmioong\\C++\\FirstGui\\vcpkg_installed\\x64-windows\\include /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP   /D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1  -MDd /showIncludes /FoCMakeFiles\\cmTC_88380.dir\\SIZEOF_ADDRESS_FAMILY.c.obj /FdCMakeFiles\\cmTC_88380.dir\\ /FS -c C:\\Users\\Noah\\Desktop\\Files\\Programmioong\\C++\\FirstGui\\vcpkg_installed\\vcpkg\\blds\\curl\\x64-windows-dbg\\CMakeFiles\\CMakeScratch\\TryCompile-okn05b\\SIZEOF_ADDRESS_FAMILY.c
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_88380.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1439~1.335\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_88380.dir\\SIZEOF_ADDRESS_FAMILY.c.obj  /out:cmTC_88380.exe /implib:cmTC_88380.lib /pdb:cmTC_88380.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  ws2_32.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CheckTypeSize.cmake:146 (try_compile)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CheckTypeSize.cmake:271 (__check_type_size_impl)"
+      - "CMakeLists.txt:1605 (check_type_size)"
+    checks:
+      - "Check size of off_t"
+    directories:
+      source: "C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/CMakeScratch/TryCompile-ffqh31"
+      binary: "C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/CMakeScratch/TryCompile-ffqh31"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP "
+      CMAKE_C_FLAGS_DEBUG: "/D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1 "
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/src/url-8_10_1-c9ac109904.clean/CMake;"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: ""
+      CMAKE_MSVC_RUNTIME_LIBRARY: "MultiThreaded$<$<CONFIG:Debug>:Debug>$<$<STREQUAL:dynamic,dynamic>:DLL>"
+      VCPKG_APPLOCAL_DEPS: "OFF"
+      VCPKG_CHAINLOAD_TOOLCHAIN_FILE: "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg/scripts/toolchains/windows.cmake"
+      VCPKG_TARGET_ARCHITECTURE: "x64"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg"
+    buildResult:
+      variable: "HAVE_SIZEOF_OFF_T"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/CMakeScratch/TryCompile-ffqh31'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_0944c
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1439~1.335\\bin\\Hostx64\\x64\\cl.exe  /nologo  -IC:\\Users\\Noah\\Desktop\\Files\\Programmioong\\C++\\FirstGui\\vcpkg_installed\\x64-windows\\include /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP   /D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1  -MDd /showIncludes /FoCMakeFiles\\cmTC_0944c.dir\\SIZEOF_OFF_T.c.obj /FdCMakeFiles\\cmTC_0944c.dir\\ /FS -c C:\\Users\\Noah\\Desktop\\Files\\Programmioong\\C++\\FirstGui\\vcpkg_installed\\vcpkg\\blds\\curl\\x64-windows-dbg\\CMakeFiles\\CMakeScratch\\TryCompile-ffqh31\\SIZEOF_OFF_T.c
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_0944c.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1439~1.335\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_0944c.dir\\SIZEOF_OFF_T.c.obj  /out:cmTC_0944c.exe /implib:cmTC_0944c.lib /pdb:cmTC_0944c.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  ws2_32.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CheckTypeSize.cmake:146 (try_compile)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CheckTypeSize.cmake:271 (__check_type_size_impl)"
+      - "CMakeLists.txt:1619 (check_type_size)"
+    checks:
+      - "Check size of curl_off_t"
+    directories:
+      source: "C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/CMakeScratch/TryCompile-n5rwae"
+      binary: "C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/CMakeScratch/TryCompile-n5rwae"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP "
+      CMAKE_C_FLAGS_DEBUG: "/D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1 "
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/src/url-8_10_1-c9ac109904.clean/CMake;"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: ""
+      CMAKE_MSVC_RUNTIME_LIBRARY: "MultiThreaded$<$<CONFIG:Debug>:Debug>$<$<STREQUAL:dynamic,dynamic>:DLL>"
+      VCPKG_APPLOCAL_DEPS: "OFF"
+      VCPKG_CHAINLOAD_TOOLCHAIN_FILE: "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg/scripts/toolchains/windows.cmake"
+      VCPKG_TARGET_ARCHITECTURE: "x64"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg"
+    buildResult:
+      variable: "HAVE_SIZEOF_CURL_OFF_T"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/CMakeScratch/TryCompile-n5rwae'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_fd30c
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1439~1.335\\bin\\Hostx64\\x64\\cl.exe  /nologo  -IC:\\Users\\Noah\\Desktop\\Files\\Programmioong\\C++\\FirstGui\\vcpkg_installed\\vcpkg\\blds\\curl\\src\\url-8_10_1-c9ac109904.clean\\include /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP   /D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1  -MDd /showIncludes /FoCMakeFiles\\cmTC_fd30c.dir\\SIZEOF_CURL_OFF_T.c.obj /FdCMakeFiles\\cmTC_fd30c.dir\\ /FS -c C:\\Users\\Noah\\Desktop\\Files\\Programmioong\\C++\\FirstGui\\vcpkg_installed\\vcpkg\\blds\\curl\\x64-windows-dbg\\CMakeFiles\\CMakeScratch\\TryCompile-n5rwae\\SIZEOF_CURL_OFF_T.c
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_fd30c.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1439~1.335\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_fd30c.dir\\SIZEOF_CURL_OFF_T.c.obj  /out:cmTC_fd30c.exe /implib:cmTC_fd30c.lib /pdb:cmTC_fd30c.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  ws2_32.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CheckTypeSize.cmake:146 (try_compile)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CheckTypeSize.cmake:271 (__check_type_size_impl)"
+      - "CMakeLists.txt:1621 (check_type_size)"
+    checks:
+      - "Check size of curl_socket_t"
+    directories:
+      source: "C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/CMakeScratch/TryCompile-z4u9p4"
+      binary: "C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/CMakeScratch/TryCompile-z4u9p4"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP "
+      CMAKE_C_FLAGS_DEBUG: "/D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1 "
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/src/url-8_10_1-c9ac109904.clean/CMake;"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: ""
+      CMAKE_MSVC_RUNTIME_LIBRARY: "MultiThreaded$<$<CONFIG:Debug>:Debug>$<$<STREQUAL:dynamic,dynamic>:DLL>"
+      VCPKG_APPLOCAL_DEPS: "OFF"
+      VCPKG_CHAINLOAD_TOOLCHAIN_FILE: "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg/scripts/toolchains/windows.cmake"
+      VCPKG_TARGET_ARCHITECTURE: "x64"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg"
+    buildResult:
+      variable: "HAVE_SIZEOF_CURL_SOCKET_T"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/CMakeScratch/TryCompile-z4u9p4'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_60830
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1439~1.335\\bin\\Hostx64\\x64\\cl.exe  /nologo  -IC:\\Users\\Noah\\Desktop\\Files\\Programmioong\\C++\\FirstGui\\vcpkg_installed\\vcpkg\\blds\\curl\\src\\url-8_10_1-c9ac109904.clean\\include /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP   /D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1  -MDd /showIncludes /FoCMakeFiles\\cmTC_60830.dir\\SIZEOF_CURL_SOCKET_T.c.obj /FdCMakeFiles\\cmTC_60830.dir\\ /FS -c C:\\Users\\Noah\\Desktop\\Files\\Programmioong\\C++\\FirstGui\\vcpkg_installed\\vcpkg\\blds\\curl\\x64-windows-dbg\\CMakeFiles\\CMakeScratch\\TryCompile-z4u9p4\\SIZEOF_CURL_SOCKET_T.c
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_60830.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1439~1.335\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_60830.dir\\SIZEOF_CURL_SOCKET_T.c.obj  /out:cmTC_60830.exe /implib:cmTC_60830.lib /pdb:cmTC_60830.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  ws2_32.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+...

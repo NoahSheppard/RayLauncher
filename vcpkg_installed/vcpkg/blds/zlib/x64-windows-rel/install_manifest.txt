@@ -1,0 +1,4 @@
+C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/pkgs/zlib_x64-windows/lib/zlib.lib
+C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/pkgs/zlib_x64-windows/bin/zlib1.dll
+C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/pkgs/zlib_x64-windows/include/zconf.h
+C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/pkgs/zlib_x64-windows/include/zlib.h

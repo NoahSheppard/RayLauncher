@@ -6,6 +6,8 @@
 #include <fstream>
 #include "json.hpp"
 #include "RayUtils.h"
+#include "Web.h"
+#include <sstream>
 
 using json = nlohmann::json;
 
@@ -17,6 +19,7 @@ wxPanel* rightPanel;
 wxBoxSizer* rightSizer;
 
 const std::list<std::string> pagesMap = {
+    "Home", // 99
 	"Account ID Lookup", // 0
     "Account Settings", // 1
 	"Device Auth", // 2
@@ -81,11 +84,12 @@ MainFrame::MainFrame(const wxString& title)
     mainSizer->Add(horizontalSizer, 1, wxEXPAND); // T
 	SetSizer(mainSizer); // sets main sizer
     CreateStatusBar(); // debug bottom bar
+
+	LoadPageContent("Home"); // go!!!
 }
 
-// # ------------------------------
+// # ------------------------------------------------------------------------------------------ Events
 
-//Events
 void MainFrame::OnButtonClicked(wxCommandEvent& event) {
     wxButton* button = dynamic_cast<wxButton*>(event.GetEventObject());                                             
     if (button) { }                                                                                                 // no reg buttons used, this should never be called
@@ -112,43 +116,41 @@ void MainFrame::OnButtonClicked(wxCommandEvent& event) {
     }
 }
 
-/*void MainFrame::OnSliderChanged(wxCommandEvent& event) {
-    wxSlider* slider = dynamic_cast<wxSlider*>(event.GetEventObject());
-    if (slider) {
-        wxString side = (slider == m_sliderLeft) ? "Left" : "Right";
-        wxString str = wxString::Format("%s Slider Value: %d", side, event.GetInt());
-        wxLogStatus(str);
-    }
-} */
-
 void MainFrame::OnTextChanged(wxCommandEvent& event) {
     wxTextCtrl* text = dynamic_cast<wxTextCtrl*>(event.GetEventObject());
     if (text) {
     }
 }
 
-// # ------------------------------
+// # ------------------------------------------------------------------------------------------ Logic
 
-//main code functions
 void MainFrame::LoadPageContent(std::string page) { // change title code but I cba
-    if (page == "Account ID Lookup") {
-        wxArrayString choices;
-		choices.Add("acc 1");
-		choices.Add("acc 2");
-		choices.Add("acc 3");
+    if (page == "Home") {
+        wxStaticText* accountName = new wxStaticText(rightPanel, wxID_ANY, "RayLauncher", wxPoint(0, 5 + 35 + 35), wxDefaultSize);
+		wxFont font = wxFont(20, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD);
+        accountName->SetForegroundColour(wxColour(0xffffff));
+		accountName->SetFont(font);
 
-        //Dropdown
+        wxClientDC dc(accountName);
+        dc.SetFont(font);
+        wxSize accountName_width = dc.GetTextExtent(accountName->GetLabelText());
+        
+        accountName->SetPosition(wxPoint((560/2)-((accountName_width.GetWidth())/2), 20));
+    }
+
+    else if (page == "Account ID Lookup") {
+        wxArrayString choices; choices.Add("acc 1"); choices.Add("acc 2"); choices.Add("acc 3");
+
 		wxChoice* accountsDropdown = new wxChoice(rightPanel, wxID_ANY, wxPoint(10, 5), wxSize(225, 25), choices);
 		//auto currentChoice = accountsDropdown->GetSelection(); // dont know type yet and I cba to figure it out
 
-        //Search box
 		wxTextCtrl* searchInput = new wxTextCtrl(rightPanel, wxID_ANY, "Search", wxPoint(10+225+10, 5), wxSize(305, 25), wxTE_PROCESS_ENTER);
 		searchInput->Bind(wxEVT_TEXT, &MainFrame::OnTextChanged, this);
 
-        //Logic button (ID: 13)
         RoundedButton* logicButton = new RoundedButton(rightPanel, 13, "Lookup", wxPoint((10 + 225 + 10) + (153 - 63), 5 + 35), wxSize(125, 25), darkPurple);
-		logicButton->Bind(wxEVT_BUTTON, &MainFrame::OnButtonClicked, this);
+        logicButton->Bind(wxEVT_BUTTON, &MainFrame::OnButtonClicked, this);
     }
+
     else if (page == "Account Settings") {
         wxTextCtrl* searchInput = new wxTextCtrl(rightPanel, wxID_ANY, "Search", wxPoint(10 + 225 + 10, 5), wxSize(305, 25), wxTE_PROCESS_ENTER);
         searchInput->Bind(wxEVT_TEXT, &MainFrame::OnTextChanged, this);
@@ -156,14 +158,19 @@ void MainFrame::LoadPageContent(std::string page) { // change title code but I c
         std::string piValue = std::to_string(data["pi"].get<double>());
         std::string happyValue = data["happy"].get<bool>() ? "true" : "false";
         RoundedButton* logicButton = new RoundedButton(rightPanel, 13, happyValue,
-            wxPoint((10 + 225 + 10) + (153 - 63), 5 + 35), wxSize(125, 25), darkPurple);
+        wxPoint((10 + 225 + 10) + (153 - 63), 5 + 35), wxSize(125, 25), darkPurple);
         logicButton->Bind(wxEVT_BUTTON, &MainFrame::OnButtonClicked, this);
+
         
     }
+
     else if (page == "Device Auth") {
-        // List(Accounts)
-        // Logic Button
+    //https://httpbin.org/ip 
+		std::string webRequest = Web::webRequest("https://httpbin.org/ip", "", Web::RequestType::GET);
+		nlohmann::json jsonObj = nlohmann::json::parse(webRequest);
+        wxLogStatus("Test: " + (wxString)((std::string)jsonObj["origin"]) + " Should be your ip");
     }
+
     else if (page == "Friends List") { // will need scrolling code
         // List(Accounts)
         // Load Friends List Button
@@ -172,46 +179,41 @@ void MainFrame::LoadPageContent(std::string page) { // change title code but I c
         // Send Request Button
         // Search Dialogue (will need event)
     }
+
     else if (page == "Exchange Code") {
         // List(Accounts)
         // Logic Button
     }
+
     else if (page == "Invite Players") { // will need scrolling code
         // List(Accounts)
         // Logic Button
         // Search
     }
+
     else if (page == "Launch Game") {
         // List(Accounts)
         // Logic Button
     }
+
     else if (page == "Research Lab") {
         // List(Accounts)
         // Logic Button
     }
+
     else if (page == "Strom Shields") {
         // List(Accounts)
         // Logic Button
     }
+
     else {
         // Uh oh
     }
 }
 
 void MainFrame::Logic(int id) {
-    wxLogStatus("Logic: " + wxString::Format("%d", id)); // logic placeholder
+    std::string response = Web::webRequest("localhost:80/post", "", Web::RequestType::POST);
+    nlohmann::json jsonObj = nlohmann::json::parse(response);
+    //std::cout << (std::string)jsonObj["origin"] << std::endl;
+    wxLogStatus("Logic: " + (wxString)((std::string)jsonObj["origin"])); // logic placeholder
 }
-
-//util
-/*std::vector<std::string> MainFrame::split(const std::string& str, const std::string& delim) { //idk this was copilot - why can't c++ be like python and have a .split() or .contains() method
-	std::vector<std::string> tokens; // vector of all applicable tokens inside of string
-	size_t prev = 0, pos = 0; // idk
-	do { // i really dont know
-		pos = str.find(delim, prev);
-		if (pos == std::string::npos) pos = str.length();
-		std::string token = str.substr(prev, pos - prev);
-		if (!token.empty()) tokens.push_back(token);
-		prev = pos + delim.length();
-	} while (pos < str.length() && prev < str.length());
-	return tokens; // ignorance is bliss
-}*/
