@@ -1,0 +1,23 @@
+{
+    "AccountID": [
+        {
+            "deviceId": "DeviceID",
+            "secret": "DeviceSecret",
+            "username": "AccountUsername1"
+        }
+    ],
+    "AccountID1": [
+        {
+            "deviceId": "DeviceID",
+            "secret": "DeviceSecret",
+            "username": "AccountUsername1"
+        }
+    ],
+    "Error": [
+        {
+            "deviceId": "",
+            "secret": "",
+            "username": "{\"access_token\":\"e6824570fe234ceea9805f4b26f02ddd\",\"expires_in\":7200,\"expires_at\":\"2024-10-24T12:10:12.257Z\",\"token_type\":\"bearer\",\"refresh_token\":\"2f573e2f6bc643b9a7c782bd0104b879\",\"refresh_expires\":28800,\"refresh_expires_at\":\"2024-10-24T18:10:12.258Z\",\"account_id\":\"f22bb3b2df1a42548b4a0e30c38291e4\",\"client_id\":\"af43dc71dd91452396fcdffbd7a8e8a9\",\"internal_client\":true,\"client_service\":\"prod-fn\",\"scope\":[\"basic_profile\"],\"displayName\":\"crazy391kratos\",\"app\":\"prod-fn\",\"in_app_id\":\"f22bb3b2df1a42548b4a0e30c38291e4\",\"product_id\":\"prod-fn\",\"application_id\":\"fghi4567FNFBKFz3E4TROb0bmPS8h1GW\",\"acr\":\"urn:epic:loa:aal1\",\"auth_time\":\"2024-10-24T10:10:12.257Z\"}"
+        }
+    ]
+}
