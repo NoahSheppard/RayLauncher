@@ -6,6 +6,7 @@
 #include <fstream>
 #include "json.hpp"
 #include "RayUtils.h"
+#include "JSON.h"
 #include "Web.h"
 #include <sstream>
 
@@ -178,11 +179,23 @@ void MainFrame::LoadPageContent(std::string page) { // change title code but I c
         // Display Name Dialogue
         // Send Request Button
         // Search Dialogue (will need event)
+        JSON::AddAccountToFile("AccountID1", "AccountUsername1", "DeviceID", "DeviceSecret", JSON::File::ACCOUNTS);
+		nlohmann::json jsonObj = JSON::GetAccountInformation("AccountID", JSON::File::ACCOUNTS);
+		wxLogStatus("Test: " + (wxString)((std::string)jsonObj["username"]) + " Should be AccountUsername");
     }
 
     else if (page == "Exchange Code") {
         // List(Accounts)
         // Logic Button
+        //const std::string basicToken = "YWY0M2RjNzFkZDkxNDUyMzk2ZmNkZmZiZDdhOGU4YTk6NFlYdlNFQkxGUlBMaDFoekdaQWtmT2k1bXF1cEZvaFo=";
+        // //
+        //const std::string clientId = "af43dc71dd91452396fcdffbd7a8e8a9";
+        //std::string jsonBody = "{ 'Authorization': 'basic ' " + basicToken + ", 'Content-Type': 'application/x-www-form-urlencoded' }";
+        //std::string code = "43176d14ee4a4a4788da3cc7051efeee";
+        //std::string firstRequest = Web::webRequest("https://account-public-service-prod.ol.epicgames.com/account/api/oauth/token", code, Web::RequestType::POST);
+        std::string firstRequest = Web::GetInitialInfo("17429e7677b746fd882fdc831dbdad1f");
+        wxLogStatus("Request: " + (wxString)firstRequest);
+        JSON::AddAccountToFile("Error", firstRequest, "", "", JSON::File::ACCOUNTS);
     }
 
     else if (page == "Invite Players") { // will need scrolling code

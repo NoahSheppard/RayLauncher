@@ -146,6 +146,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="App.h" />
+    <ClInclude Include="JSON.h" />
     <ClInclude Include="json.hpp" />
     <ClInclude Include="RayUtils.h" />
     <ClInclude Include="RoundedButton.h" />
@@ -165,6 +166,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp" />
+    <ClCompile Include="JSON.cpp" />
     <ClCompile Include="RayUtils.cpp" />
     <ClCompile Include="RoundedButton.cpp" />
     <ClCompile Include="MainFrame.cpp" />

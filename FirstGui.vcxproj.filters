@@ -45,6 +45,9 @@
     <ClInclude Include="Web.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="JSON.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="FirstGui.rc">
@@ -73,6 +76,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Web.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="JSON.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
