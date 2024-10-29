@@ -9,6 +9,9 @@
 #include "JSON.h"
 #include "Web.h"
 #include <sstream>
+#include "AccountsWindow.h"
+#include <wx/icon.h>
+#include <windows.h>
 
 using json = nlohmann::json;
 
@@ -18,6 +21,10 @@ const wxColour lightColour = wxColour(0x202020);
 const wxColour darkColour = wxColour(0x0a0a0a);
 wxPanel* rightPanel;
 wxBoxSizer* rightSizer;
+
+bool MainFrame::accountsWindowOpen = false;
+bool MainFrame::creditsWindowOpen = false;
+bool MainFrame::settingsWindowOpen = false;
 
 const std::list<std::string> pagesMap = {
     "Home", // 99
@@ -85,8 +92,9 @@ MainFrame::MainFrame(const wxString& title)
     mainSizer->Add(horizontalSizer, 1, wxEXPAND); // T
 	SetSizer(mainSizer); // sets main sizer
     CreateStatusBar(); // debug bottom bar
-
+    SetupIcon();
 	LoadPageContent("Home"); // go!!!
+
 }
 
 // # ------------------------------------------------------------------------------------------ Events
@@ -98,7 +106,24 @@ void MainFrame::OnButtonClicked(wxCommandEvent& event) {
 		RoundedButton* button = dynamic_cast<RoundedButton*>(event.GetEventObject());
         wxString buttonText = button->GetNewLabel();
         if (buttonText == "Accounts" || buttonText == "Credits" || buttonText == "Settings") {
-            //tbd
+            if (buttonText == "Accounts") {
+                if (!accountsWindowOpen) {
+                    AccountsWindow::OnInit();
+					accountsWindowOpen = true;
+                }
+            }
+			else if (buttonText == "Credits") {
+				if (!creditsWindowOpen) {
+                    //CreditsWindow::OnInit();
+					creditsWindowOpen = true;
+				}
+			}
+			else if (buttonText == "Settings") {
+				if (!settingsWindowOpen) {
+					//SettingsWindow::OnInit();
+					settingsWindowOpen = true;
+				}
+			}
         }
         else if (std::find(pagesMap.begin(), pagesMap.end(), buttonText.ToStdString()) != pagesMap.end()) {         // if in pagesMap list
             rightPanel->DestroyChildren(); 
@@ -123,6 +148,33 @@ void MainFrame::OnTextChanged(wxCommandEvent& event) {
     }
 }
 
+void MainFrame::OnPanelPaint(wxPaintEvent& evt)
+{
+    wxPaintDC dc(rightPanel);
+
+    if (!m_image.IsOk()) return;
+
+    // Get panel dimensions
+    int panelWidth = rightPanel->GetSize().GetWidth();
+    int panelHeight = rightPanel->GetSize().GetHeight();
+
+    // Calculate scaling factor based on height
+    double scale = (double)panelHeight / m_image.GetHeight();
+    int newWidth = m_image.GetWidth() * scale;
+    int newHeight = panelHeight;
+
+    // Scale the image
+    wxImage scaledImage = m_image.Scale(newWidth, newHeight, wxIMAGE_QUALITY_HIGH);
+    wxBitmap scaledBitmap(scaledImage);
+
+    // Center horizontally
+    int x = (panelWidth - newWidth) / 2;
+    if (x < 0) x = 0;  // If image is wider than panel, start from left edge
+
+    // Draw the bitmap
+    dc.DrawBitmap(scaledBitmap, x, 0, false);
+}
+
 // # ------------------------------------------------------------------------------------------ Logic
 
 void MainFrame::LoadPageContent(std::string page) { // change title code but I cba
@@ -137,6 +189,19 @@ void MainFrame::LoadPageContent(std::string page) { // change title code but I c
         wxSize accountName_width = dc.GetTextExtent(accountName->GetLabelText());
         
         accountName->SetPosition(wxPoint((560/2)-((accountName_width.GetWidth())/2), 20));
+
+        //Image
+        /*if (!m_image.LoadFile("RayLauncher.jpg"))
+        {
+            wxMessageBox("Failed to load image", "Error");
+        }
+
+        // Bind events
+        rightPanel->Bind(wxEVT_PAINT, &MainFrame::OnPanelPaint, this);
+        rightPanel->Bind(wxEVT_SIZE, [this](wxSizeEvent& evt) {
+            rightPanel->Refresh();
+            evt.Skip();
+        });*/
     }
 
     else if (page == "Account ID Lookup") {
@@ -167,9 +232,9 @@ void MainFrame::LoadPageContent(std::string page) { // change title code but I c
 
     else if (page == "Device Auth") {
     //https://httpbin.org/ip 
-		std::string webRequest = Web::webRequest("https://httpbin.org/ip", "", Web::RequestType::GET);
-		nlohmann::json jsonObj = nlohmann::json::parse(webRequest);
-        wxLogStatus("Test: " + (wxString)((std::string)jsonObj["origin"]) + " Should be your ip");
+		//std::string webRequest = Web::webRequest("https://httpbin.org/ip", "", Web::RequestType::GET);
+		//nlohmann::json jsonObj = nlohmann::json::parse(webRequest);
+        //wxLogStatus("Test: " + (wxString)((std::string)jsonObj["origin"]) + " Should be your ip");
     }
 
     else if (page == "Friends List") { // will need scrolling code
@@ -179,23 +244,12 @@ void MainFrame::LoadPageContent(std::string page) { // change title code but I c
         // Display Name Dialogue
         // Send Request Button
         // Search Dialogue (will need event)
-        JSON::AddAccountToFile("AccountID1", "AccountUsername1", "DeviceID", "DeviceSecret", JSON::File::ACCOUNTS);
-		nlohmann::json jsonObj = JSON::GetAccountInformation("AccountID", JSON::File::ACCOUNTS);
-		wxLogStatus("Test: " + (wxString)((std::string)jsonObj["username"]) + " Should be AccountUsername");
+		wxLogStatus("Works so far!");
     }
 
     else if (page == "Exchange Code") {
         // List(Accounts)
         // Logic Button
-        //const std::string basicToken = "YWY0M2RjNzFkZDkxNDUyMzk2ZmNkZmZiZDdhOGU4YTk6NFlYdlNFQkxGUlBMaDFoekdaQWtmT2k1bXF1cEZvaFo=";
-        // //
-        //const std::string clientId = "af43dc71dd91452396fcdffbd7a8e8a9";
-        //std::string jsonBody = "{ 'Authorization': 'basic ' " + basicToken + ", 'Content-Type': 'application/x-www-form-urlencoded' }";
-        //std::string code = "43176d14ee4a4a4788da3cc7051efeee";
-        //std::string firstRequest = Web::webRequest("https://account-public-service-prod.ol.epicgames.com/account/api/oauth/token", code, Web::RequestType::POST);
-        std::string firstRequest = Web::GetInitialInfo("17429e7677b746fd882fdc831dbdad1f");
-        wxLogStatus("Request: " + (wxString)firstRequest);
-        JSON::AddAccountToFile("Error", firstRequest, "", "", JSON::File::ACCOUNTS);
     }
 
     else if (page == "Invite Players") { // will need scrolling code
@@ -225,8 +279,40 @@ void MainFrame::LoadPageContent(std::string page) { // change title code but I c
 }
 
 void MainFrame::Logic(int id) {
-    std::string response = Web::webRequest("localhost:80/post", "", Web::RequestType::POST);
-    nlohmann::json jsonObj = nlohmann::json::parse(response);
+    //std::string response = Web::webRequest("localhost:80/post", "", Web::RequestType::POST);
+    //nlohmann::json jsonObj = nlohmann::json::parse(response);
     //std::cout << (std::string)jsonObj["origin"] << std::endl;
-    wxLogStatus("Logic: " + (wxString)((std::string)jsonObj["origin"])); // logic placeholder
+    //wxLogStatus("Logic: " + (wxString)((std::string)jsonObj["origin"])); // logic placeholder
+}
+
+void MainFrame::WindowClosed(MainFrame::WINDOWS window) {
+	switch (window) {
+        case MainFrame::WINDOWS::ACCOUNTS:
+		    accountsWindowOpen = false;
+		    break;
+	    case MainFrame::WINDOWS::CREDITS:
+		    creditsWindowOpen = false;
+		    break;
+	    case MainFrame::WINDOWS::SETTINGS:
+		    settingsWindowOpen = false;
+		    break;
+	    default:
+		    break;
+	}
+}
+
+void MainFrame::SetupIcon()
+{
+    // Load icon from embedded resources using Windows API
+    HICON hIcon = LoadIcon(GetModuleHandle(NULL), MAKEINTRESOURCE(107));
+    if (hIcon)
+    {
+        wxIcon icon;
+        icon.CreateFromHICON(hIcon);
+        if (icon.IsOk())
+        {
+            SetIcon(icon);
+        }
+        DestroyIcon(hIcon);
+    }
 }
