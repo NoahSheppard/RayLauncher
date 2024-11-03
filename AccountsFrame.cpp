@@ -30,7 +30,7 @@ const wxColour darkColour = wxColour(0x0a0a0a);
 wxTextCtrl* exchangeCodeInput;
 //wxPanel* rightPanel;
 //wxBoxSizer* rightSizer;
-
+AccountsFrame* AccountsFrame::instance = nullptr;
 
 
 AccountsFrame::AccountsFrame(const wxString& title)
@@ -71,6 +71,20 @@ AccountsFrame::AccountsFrame(const wxString& title)
     CreateStatusBar(); // debug bottom bar
 
     Bind(wxEVT_CLOSE_WINDOW, &AccountsFrame::OnCloseWindow, this);
+
+    HICON hIcon = LoadIcon(GetModuleHandle(NULL), MAKEINTRESOURCE(107));
+    if (hIcon)
+    {
+        wxIcon icon;
+        icon.CreateFromHICON(hIcon);
+        if (icon.IsOk())
+        {
+            SetIcon(icon);
+        }
+        DestroyIcon(hIcon);
+    }
+
+    instance = this;
 }
 
 // # ------------------------------------------------------------------------------------------ Events
@@ -106,7 +120,7 @@ void AccountsFrame::OnTextChanged(wxCommandEvent& event) {
 
 void AccountsFrame::OnCloseWindow(wxCloseEvent& event) {
     MainFrame::WindowClosed(MainFrame::WINDOWS::ACCOUNTS);
-    Destroy();
+    AccountsFrame::Destroy();
 }
 
 // # ------------------------------------------------------------------------------------------ Logic

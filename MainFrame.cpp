@@ -12,6 +12,9 @@
 #include "AccountsWindow.h"
 #include <wx/icon.h>
 #include <windows.h>
+#include "AccountsFrame.h"
+#include <wx/file.h>
+#include <wx/filename.h>
 
 using json = nlohmann::json;
 
@@ -94,6 +97,7 @@ MainFrame::MainFrame(const wxString& title)
     CreateStatusBar(); // debug bottom bar
     SetupIcon();
 	LoadPageContent("Home"); // go!!!
+    Bind(wxEVT_CLOSE_WINDOW, &MainFrame::OnCloseWindow, this);
 
 }
 
@@ -152,7 +156,11 @@ void MainFrame::OnPanelPaint(wxPaintEvent& evt)
 {
     wxPaintDC dc(rightPanel);
 
-    if (!m_image.IsOk()) return;
+    if (!m_image.IsOk())
+    {
+        wxLogMessage("No valid image to paint");
+        return;
+    }
 
     // Get panel dimensions
     int panelWidth = rightPanel->GetSize().GetWidth();
@@ -167,12 +175,52 @@ void MainFrame::OnPanelPaint(wxPaintEvent& evt)
     wxImage scaledImage = m_image.Scale(newWidth, newHeight, wxIMAGE_QUALITY_HIGH);
     wxBitmap scaledBitmap(scaledImage);
 
-    // Center horizontally
-    int x = (panelWidth - newWidth) / 2;
-    if (x < 0) x = 0;  // If image is wider than panel, start from left edge
+    // Calculate how much of the image needs to be cropped
+    int excessWidth = newWidth - panelWidth;
 
-    // Draw the bitmap
-    dc.DrawBitmap(scaledBitmap, x, 0, false);
+    // If image is wider than panel, crop equally from both sides
+    int sourceX = 0;
+    if (excessWidth > 0) {
+        sourceX = excessWidth / 2;
+    }
+
+    // Get the portion of the image we want to display
+    wxBitmap displayBitmap = scaledBitmap.GetSubBitmap(
+        wxRect(sourceX, 0, std::min(newWidth, panelWidth), newHeight)
+    );
+
+    // Draw the main image
+    dc.DrawBitmap(displayBitmap, 0, 0, false);
+
+    // Create a blurred overlay
+    wxImage blurOverlay = displayBitmap.ConvertToImage();
+
+    // Apply Gaussian blur
+    blurOverlay = blurOverlay.Blur(m_blurRadius);
+
+    // Modify the alpha channel for the entire image
+    if (!blurOverlay.HasAlpha()) {
+        blurOverlay.InitAlpha();
+    }
+
+    unsigned char* alpha = blurOverlay.GetAlpha();
+    for (int i = 0; i < panelWidth * panelHeight; i++) {
+        alpha[i] = m_blurOpacity;
+    }
+
+    // Convert back to bitmap with alpha
+    wxBitmap blurredBitmap(blurOverlay);
+
+    // Draw the blurred overlay
+    wxMemoryDC memDC;
+    memDC.SelectObject(blurredBitmap);
+    dc.Blit(0, 0, panelWidth, panelHeight, &memDC, 0, 0, wxCOPY, true);
+}
+
+void MainFrame::OnCloseWindow(wxCloseEvent& event) {
+    //Destroy the AccountsWindow
+    AccountsFrame::DestroyWindow();
+    Destroy();
 }
 
 // # ------------------------------------------------------------------------------------------ Logic
@@ -180,18 +228,69 @@ void MainFrame::OnPanelPaint(wxPaintEvent& evt)
 void MainFrame::LoadPageContent(std::string page) { // change title code but I cba
     if (page == "Home") {
         wxStaticText* accountName = new wxStaticText(rightPanel, wxID_ANY, "RayLauncher", wxPoint(0, 5 + 35 + 35), wxDefaultSize);
-		wxFont font = wxFont(20, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD);
+
+        HMODULE hModule = GetModuleHandle(NULL);
+        if (!hModule) {
+            wxLogError("Failed to get module handle");
+            return;
+        }
+
+        HRSRC hResource = FindResource(hModule, MAKEINTRESOURCE(110), RT_RCDATA);
+        if (!hResource) {
+            wxLogError("Failed to find resource: %d", GetLastError());
+            return;
+        }
+
+        HGLOBAL hMemory = LoadResource(hModule, hResource);
+        if (!hMemory) {
+            wxLogError("Failed to load resource: %d", GetLastError());
+            return;
+        }
+
+        void* fontData = LockResource(hMemory);
+        if (!fontData) {
+            wxLogError("Failed to lock resource: %d", GetLastError());
+            return;
+        }
+
+        DWORD fontDataSize = SizeofResource(hModule, hResource);
+        wxLogStatus((wxString)"Font data size: " + std::to_string(fontDataSize));
+
+        // Check if the data starts with the TTF magic number
+        const unsigned char* data = static_cast<const unsigned char*>(fontData);
+        if (fontDataSize < 4 || data[0] != 0x00 || data[1] != 0x01 || data[2] != 0x00 || data[3] != 0x00) {
+            wxLogError("Invalid TTF format - wrong magic number");
+            return;
+        }
+
+        // Try to write the font data to a temporary file and load it from there
+        wxString tempPath = wxFileName::GetTempDir() + wxFILE_SEP_PATH + "temp.ttf";
+        wxFile file;
+        if (file.Create(tempPath, true)) {
+            if (file.Write(fontData, fontDataSize) == fontDataSize) {
+                bool success = wxFont::AddPrivateFont(wxT("Burbank.ttf"));
+                if (!success) {
+                    wxLogError("Failed to load font from temp file");
+                }
+            }
+            file.Close();
+            wxRemoveFile(tempPath);
+        }
+
+        //wxMessageBox(std::to_string(success), "Caption");
+        wxFont font = wxFont(30, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, "Burbank Big Rg Bd");
+        //wxFont font = wxFont(20, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD);
         accountName->SetForegroundColour(wxColour(0xffffff));
 		accountName->SetFont(font);
+        accountName->SetBackgroundColour(wxColour(0x55395d));
 
         wxClientDC dc(accountName);
         dc.SetFont(font);
         wxSize accountName_width = dc.GetTextExtent(accountName->GetLabelText());
-        
         accountName->SetPosition(wxPoint((560/2)-((accountName_width.GetWidth())/2), 20));
 
         //Image
-        /*if (!m_image.LoadFile("RayLauncher.jpg"))
+        if (!m_image.LoadFile("RayLauncher.jpg"))
         {
             wxMessageBox("Failed to load image", "Error");
         }
@@ -201,7 +300,7 @@ void MainFrame::LoadPageContent(std::string page) { // change title code but I c
         rightPanel->Bind(wxEVT_SIZE, [this](wxSizeEvent& evt) {
             rightPanel->Refresh();
             evt.Skip();
-        });*/
+        });
     }
 
     else if (page == "Account ID Lookup") {
@@ -244,7 +343,6 @@ void MainFrame::LoadPageContent(std::string page) { // change title code but I c
         // Display Name Dialogue
         // Send Request Button
         // Search Dialogue (will need event)
-		wxLogStatus("Works so far!");
     }
 
     else if (page == "Exchange Code") {

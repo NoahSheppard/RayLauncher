@@ -13,18 +13,21 @@ public:
     
 private:
     void OnButtonClicked(wxCommandEvent& event);
-    void OnSliderChanged(wxCommandEvent& event);
     void OnTextChanged(wxCommandEvent& event);
-    void OnPaint(wxPaintEvent& event);
+    void OnPanelPaint(wxPaintEvent& evt);
+    void OnCloseWindow(wxCloseEvent& event);
+
 	void LoadPageContent(std::string page);
-    //std::vector<std::string> split(const std::string& str, const std::string& delim);
     void Logic(int id);
     void SetupIcon();
-    void OnPanelPaint(wxPaintEvent& evt);
 
     wxTextCtrl* m_textLeft;
     wxTextCtrl* m_textRight;
     wxSlider* m_sliderLeft;
     wxSlider* m_sliderRight;
     wxImage m_image;
+
+    int m_blurRadius = 5;
+    int m_blurOpacity = 255;  // 0-255
+
 };
