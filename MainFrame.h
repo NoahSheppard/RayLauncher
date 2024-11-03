@@ -10,6 +10,7 @@ public:
     enum WINDOWS
     { ACCOUNTS, CREDITS, SETTINGS };
     static void WindowClosed(MainFrame::WINDOWS window);
+    std::string SetupResource(std::string fileName, int id);
     
 private:
     void OnButtonClicked(wxCommandEvent& event);
@@ -20,6 +21,7 @@ private:
 	void LoadPageContent(std::string page);
     void Logic(int id);
     void SetupIcon();
+    void SetupFont();
 
     wxTextCtrl* m_textLeft;
     wxTextCtrl* m_textRight;
