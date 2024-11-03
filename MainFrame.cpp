@@ -28,6 +28,7 @@ wxBoxSizer* rightSizer;
 bool MainFrame::accountsWindowOpen = false;
 bool MainFrame::creditsWindowOpen = false;
 bool MainFrame::settingsWindowOpen = false;
+static bool FontCreated = false;
 
 const std::list<std::string> pagesMap = {
     "Home", // 99
@@ -96,6 +97,7 @@ MainFrame::MainFrame(const wxString& title)
 	SetSizer(mainSizer); // sets main sizer
     CreateStatusBar(); // debug bottom bar
     SetupIcon();
+    SetupFont();
 	LoadPageContent("Home"); // go!!!
     Bind(wxEVT_CLOSE_WINDOW, &MainFrame::OnCloseWindow, this);
 
@@ -229,57 +231,7 @@ void MainFrame::LoadPageContent(std::string page) { // change title code but I c
     if (page == "Home") {
         wxStaticText* accountName = new wxStaticText(rightPanel, wxID_ANY, "RayLauncher", wxPoint(0, 5 + 35 + 35), wxDefaultSize);
 
-        HMODULE hModule = GetModuleHandle(NULL);
-        if (!hModule) {
-            wxLogError("Failed to get module handle");
-            return;
-        }
-
-        HRSRC hResource = FindResource(hModule, MAKEINTRESOURCE(110), RT_RCDATA);
-        if (!hResource) {
-            wxLogError("Failed to find resource: %d", GetLastError());
-            return;
-        }
-
-        HGLOBAL hMemory = LoadResource(hModule, hResource);
-        if (!hMemory) {
-            wxLogError("Failed to load resource: %d", GetLastError());
-            return;
-        }
-
-        void* fontData = LockResource(hMemory);
-        if (!fontData) {
-            wxLogError("Failed to lock resource: %d", GetLastError());
-            return;
-        }
-
-        DWORD fontDataSize = SizeofResource(hModule, hResource);
-        wxLogStatus((wxString)"Font data size: " + std::to_string(fontDataSize));
-
-        // Check if the data starts with the TTF magic number
-        const unsigned char* data = static_cast<const unsigned char*>(fontData);
-        if (fontDataSize < 4 || data[0] != 0x00 || data[1] != 0x01 || data[2] != 0x00 || data[3] != 0x00) {
-            wxLogError("Invalid TTF format - wrong magic number");
-            return;
-        }
-
-        // Try to write the font data to a temporary file and load it from there
-        wxString tempPath = wxFileName::GetTempDir() + wxFILE_SEP_PATH + "temp.ttf";
-        wxFile file;
-        if (file.Create(tempPath, true)) {
-            if (file.Write(fontData, fontDataSize) == fontDataSize) {
-                bool success = wxFont::AddPrivateFont(wxT("Burbank.ttf"));
-                if (!success) {
-                    wxLogError("Failed to load font from temp file");
-                }
-            }
-            file.Close();
-            wxRemoveFile(tempPath);
-        }
-
-        //wxMessageBox(std::to_string(success), "Caption");
         wxFont font = wxFont(30, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, "Burbank Big Rg Bd");
-        //wxFont font = wxFont(20, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD);
         accountName->SetForegroundColour(wxColour(0xffffff));
 		accountName->SetFont(font);
         accountName->SetBackgroundColour(wxColour(0x55395d));
@@ -290,10 +242,7 @@ void MainFrame::LoadPageContent(std::string page) { // change title code but I c
         accountName->SetPosition(wxPoint((560/2)-((accountName_width.GetWidth())/2), 20));
 
         //Image
-        if (!m_image.LoadFile("RayLauncher.jpg"))
-        {
-            wxMessageBox("Failed to load image", "Error");
-        }
+        m_image.LoadFile(SetupResource("RayLauncher.jpg", 111));
 
         // Bind events
         rightPanel->Bind(wxEVT_PAINT, &MainFrame::OnPanelPaint, this);
@@ -399,6 +348,9 @@ void MainFrame::WindowClosed(MainFrame::WINDOWS window) {
 	}
 }
 
+
+// # ------------------------------------------------------------------------------------------ Setup
+
 void MainFrame::SetupIcon()
 {
     // Load icon from embedded resources using Windows API
@@ -414,3 +366,25 @@ void MainFrame::SetupIcon()
         DestroyIcon(hIcon);
     }
 }
+
+void MainFrame::SetupFont() {
+    wxFont::AddPrivateFont(SetupResource("Burbank.ttf", 110));
+}
+
+std::string MainFrame::SetupResource(std::string fileName, int id) {
+    HMODULE hModule = GetModuleHandle(NULL);
+    HRSRC hResource = FindResource(hModule, MAKEINTRESOURCE(id), RT_RCDATA);
+    HGLOBAL hMemory = LoadResource(hModule, hResource);
+    void* fontData = LockResource(hMemory);
+    DWORD fontDataSize = SizeofResource(hModule, hResource);
+    wxString tempPath = wxFileName::GetTempDir() + wxFILE_SEP_PATH + fileName;
+    wxFile file;
+    if (file.Create(tempPath, true)) {
+        if (file.Write(fontData, fontDataSize) == fontDataSize) {
+            file.Close();
+            return (std::string)tempPath;
+        }
+    }
+    return nullptr;
+}
+

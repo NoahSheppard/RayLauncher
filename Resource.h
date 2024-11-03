@@ -13,6 +13,7 @@
 #define IDI_SMALL				108
 #define IDC_RAYLAUNCHER			109
 #define FONT_BURBANK            110
+#define IMAGE_RAYLAUNCHER_BG    111
 #define IDC_MYICON				2
 #ifndef IDC_STATIC
 #define IDC_STATIC				-1
