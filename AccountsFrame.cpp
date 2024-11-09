@@ -28,8 +28,6 @@ const wxColour lightPurple = wxColour(0xa679dc);
 const wxColour lightColour = wxColour(0x202020);
 const wxColour darkColour = wxColour(0x0a0a0a);
 wxTextCtrl* exchangeCodeInput;
-//wxPanel* rightPanel;
-//wxBoxSizer* rightSizer;
 AccountsFrame* AccountsFrame::instance = nullptr;
 
 
@@ -73,12 +71,10 @@ AccountsFrame::AccountsFrame(const wxString& title)
     Bind(wxEVT_CLOSE_WINDOW, &AccountsFrame::OnCloseWindow, this);
 
     HICON hIcon = LoadIcon(GetModuleHandle(NULL), MAKEINTRESOURCE(107));
-    if (hIcon)
-    {
+    if (hIcon) {
         wxIcon icon;
         icon.CreateFromHICON(hIcon);
-        if (icon.IsOk())
-        {
+        if (icon.IsOk()) {
             SetIcon(icon);
         }
         DestroyIcon(hIcon);
@@ -100,16 +96,14 @@ void AccountsFrame::OnButtonClicked(wxCommandEvent& event) {
             LoadPageContent(buttonText.ToStdString());
         }
         else {                                                                                                      // only possible to be called if: is inside of rightpanel/is logic, or I fucked up somewhere
-            /*for (std::string button_id : buttonMap) {
+            for (std::string button_id : buttonMap) {
                 std::vector<std::string> button_id_split = RayUtils::split(button_id, "_");
                 std::string __button_id = ((std::string)button_id_split[0] + (std::string)button_id_split[1]);      // turn button id from x_y to xy (i <3 c++)
                 if (button->GetId() == std::stoi(__button_id)) {
                     Logic(std::stoi(__button_id));
                     break;
                 }
-            }*/
-			Logic(button->GetId());
-            //break;
+            }
         }
     }
 }
@@ -135,7 +129,7 @@ void AccountsFrame::LoadPageContent(std::string page) {
 		wxStaticText* exchangeCodeDesc = RayUtils::CreateCenteredText(rightPanel, 12, "Enter the code you received from the link", 60, 12, false, RayUtils::Window::ACCOUNTS);
 		exchangeCodeInput = new wxTextCtrl(rightPanel, 13, "", wxPoint(120, 103), wxSize(290, 20));
         wxHyperlinkCtrl* exchangeCodeLink = RayUtils::CreateHyperlink(rightPanel, 14, "Get Code", "https://www.epicgames.com/id/api/redirect?clientId=af43dc71dd91452396fcdffbd7a8e8a9&responseType=code", wxPoint(10, 100), 16);
-        Bind(wxEVT_TEXT, &AccountsFrame::OnTextChanged, this);
+        exchangeCodeLink->Bind(wxEVT_TEXT, &AccountsFrame::OnTextChanged, this);
         RoundedButton* exchangeCodeButton = new RoundedButton(rightPanel, 15, "Login", wxPoint(120, 130), wxSize(290, 25), darkPurple);
         exchangeCodeButton->Bind(wxEVT_BUTTON, &AccountsFrame::OnButtonClicked, this);
     }
@@ -143,13 +137,15 @@ void AccountsFrame::LoadPageContent(std::string page) {
 }
 
 void AccountsFrame::Logic(int id) {
-    if (id == 15) {
-        if (!(Web::Login((std::string)exchangeCodeInput->GetValue()) == "")) {
-            wxMessageBox("Exchange Code Invalid, try re-clicking the link\nIf the code is null, login first", "RayLauncher - Accounts", wxICON_ERROR);
-            exchangeCodeInput->SetValue("");
-        }
-        else {
-            exchangeCodeInput->SetValue("Account Added!");
-        }
+    switch (id) {
+        case 15:
+            if (!(Web::Login((std::string)exchangeCodeInput->GetValue()) == "")) {
+                wxMessageBox("Exchange Code Invalid, try re-clicking the link\nIf the code is null, login first", "RayLauncher - Accounts", wxICON_ERROR);
+                exchangeCodeInput->SetValue("");
+            }
+            else {
+                exchangeCodeInput->SetValue("Account Added!");
+            }
+			break;
     }
 }
