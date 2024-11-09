@@ -19,6 +19,7 @@
 #include <wx/clipbrd.h>
 /*
 libcurl.dll MSVCP140D.dll VCRUNTIME140D.dll VCRUNTIME140_1D.dll
+// DLL's that dont work
 */
 
 using json = nlohmann::json;
@@ -381,16 +382,12 @@ void MainFrame::FillDropdownWithAccounts(wxChoice* dropdown) {
 
 // # ------------------------------------------------------------------------------------------ Setup
 
-void MainFrame::SetupIcon()
-{
-    // Load icon from embedded resources using Windows API
+void MainFrame::SetupIcon() {
     HICON hIcon = LoadIcon(GetModuleHandle(NULL), MAKEINTRESOURCE(107));
-    if (hIcon)
-    {
+    if (hIcon) {
         wxIcon icon;
         icon.CreateFromHICON(hIcon);
-        if (icon.IsOk())
-        {
+        if (icon.IsOk()) {
             SetIcon(icon);
         }
         DestroyIcon(hIcon);
