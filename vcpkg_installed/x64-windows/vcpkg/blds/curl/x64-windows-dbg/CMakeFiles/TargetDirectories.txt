@@ -1,0 +1,14 @@
+C:/Users/Noah/Desktop/Files/Programmioong/C++/RayLauncher/vcpkg_installed/x64-windows/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/curl_uninstall.dir
+C:/Users/Noah/Desktop/Files/Programmioong/C++/RayLauncher/vcpkg_installed/x64-windows/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/edit_cache.dir
+C:/Users/Noah/Desktop/Files/Programmioong/C++/RayLauncher/vcpkg_installed/x64-windows/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/rebuild_cache.dir
+C:/Users/Noah/Desktop/Files/Programmioong/C++/RayLauncher/vcpkg_installed/x64-windows/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/list_install_components.dir
+C:/Users/Noah/Desktop/Files/Programmioong/C++/RayLauncher/vcpkg_installed/x64-windows/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/install.dir
+C:/Users/Noah/Desktop/Files/Programmioong/C++/RayLauncher/vcpkg_installed/x64-windows/vcpkg/blds/curl/x64-windows-dbg/CMakeFiles/install/local.dir
+C:/Users/Noah/Desktop/Files/Programmioong/C++/RayLauncher/vcpkg_installed/x64-windows/vcpkg/blds/curl/x64-windows-dbg/lib/CMakeFiles/curlu.dir
+C:/Users/Noah/Desktop/Files/Programmioong/C++/RayLauncher/vcpkg_installed/x64-windows/vcpkg/blds/curl/x64-windows-dbg/lib/CMakeFiles/libcurl_object.dir
+C:/Users/Noah/Desktop/Files/Programmioong/C++/RayLauncher/vcpkg_installed/x64-windows/vcpkg/blds/curl/x64-windows-dbg/lib/CMakeFiles/libcurl_shared.dir
+C:/Users/Noah/Desktop/Files/Programmioong/C++/RayLauncher/vcpkg_installed/x64-windows/vcpkg/blds/curl/x64-windows-dbg/lib/CMakeFiles/edit_cache.dir
+C:/Users/Noah/Desktop/Files/Programmioong/C++/RayLauncher/vcpkg_installed/x64-windows/vcpkg/blds/curl/x64-windows-dbg/lib/CMakeFiles/rebuild_cache.dir
+C:/Users/Noah/Desktop/Files/Programmioong/C++/RayLauncher/vcpkg_installed/x64-windows/vcpkg/blds/curl/x64-windows-dbg/lib/CMakeFiles/list_install_components.dir
+C:/Users/Noah/Desktop/Files/Programmioong/C++/RayLauncher/vcpkg_installed/x64-windows/vcpkg/blds/curl/x64-windows-dbg/lib/CMakeFiles/install.dir
+C:/Users/Noah/Desktop/Files/Programmioong/C++/RayLauncher/vcpkg_installed/x64-windows/vcpkg/blds/curl/x64-windows-dbg/lib/CMakeFiles/install/local.dir

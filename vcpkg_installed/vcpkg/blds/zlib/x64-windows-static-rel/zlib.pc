@@ -1,0 +1,13 @@
+prefix=C:/Users/Noah/Desktop/Files/Programmioong/C++/RayLauncher/vcpkg_installed/vcpkg/pkgs/zlib_x64-windows-static
+exec_prefix=C:/Users/Noah/Desktop/Files/Programmioong/C++/RayLauncher/vcpkg_installed/vcpkg/pkgs/zlib_x64-windows-static
+libdir=C:/Users/Noah/Desktop/Files/Programmioong/C++/RayLauncher/vcpkg_installed/vcpkg/pkgs/zlib_x64-windows-static/lib
+sharedlibdir=C:/Users/Noah/Desktop/Files/Programmioong/C++/RayLauncher/vcpkg_installed/vcpkg/pkgs/zlib_x64-windows-static/lib
+includedir=C:/Users/Noah/Desktop/Files/Programmioong/C++/RayLauncher/vcpkg_installed/vcpkg/pkgs/zlib_x64-windows-static/include
+
+Name: zlib
+Description: zlib compression library
+Version: 1.3
+
+Requires:
+Libs: -L${libdir} -L${sharedlibdir} -lzlib
+Cflags: -I${includedir}

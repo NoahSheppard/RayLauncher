@@ -1,6 +1,6 @@
-Package: curl
-Feature: sspi
+Package: vcpkg-cmake-config
+Version: 2024-05-23
 Architecture: x64-windows
 Multi-Arch: same
-Description: SSPI support
-Status: install ok installed
+Abi: 599827461be5658f71ee94d7cd2159b00ddd7e60a1d68a3acc6d47e0577a019a
+Status: purge ok not-installed

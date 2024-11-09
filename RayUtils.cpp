@@ -1,12 +1,10 @@
 #include "RayUtils.h"
 #include <wx/hyperlink.h>
 
-std::vector<std::string> RayUtils::split(const std::string& str, const std::string& delim)
-{
+std::vector<std::string> RayUtils::split(const std::string& str, const std::string& delim) {
 	std::vector<std::string> tokens;
 	size_t prev = 0, pos = 0;
-	do
-	{
+	do {
 		pos = str.find(delim, prev);
 		if (pos == std::string::npos) pos = str.length();
 		std::string token = str.substr(prev, pos - prev);
@@ -22,14 +20,15 @@ wxStaticText* RayUtils::CreateText(wxPanel* panel, int id, std::string text, wxP
 	textObj->SetPosition(point);
 	return textObj;
 }
-wxStaticText* RayUtils::CreateCenteredText(wxPanel* panel, int id, std::string text, int y_height, int textSize, bool bold) {
+wxStaticText* RayUtils::CreateCenteredText(wxPanel* panel, int id, std::string text, int y_height, int textSize, bool bold, RayUtils::Window window) {
+	int width = panel->GetMaxWidth();
 	wxStaticText* textObj = new wxStaticText(panel, id, text, wxDefaultPosition, wxDefaultSize);
 	wxSize textObjWidth = GetTextSize(textObj, textSize, bold);
-	textObj->SetPosition(wxPoint((420 / 2) - ((textObjWidth.GetWidth()) / 2), y_height));
+	textObj->SetPosition(wxPoint(((window == Window::ACCOUNTS ? 420 : window == Window::MAIN ? 560 : 0)/2) - ((textObjWidth.GetWidth()) / 2), y_height));
 	return textObj;
 }
 wxSize RayUtils::GetTextSize(wxStaticText* textObj, int size, bool bold) {
-	wxFont fontObj = wxFont(size, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, bold ? wxFONTWEIGHT_BOLD : wxFONTWEIGHT_SEMIBOLD);
+	wxFont fontObj = wxFont(size, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, bold ? wxFONTWEIGHT_BOLD : wxFONTWEIGHT_SEMIBOLD, false, "Burbank Big Rg Bd");
 	textObj->SetForegroundColour(wxColour(0xffffff));
 	textObj->SetFont(fontObj);
 	wxClientDC dc(textObj);

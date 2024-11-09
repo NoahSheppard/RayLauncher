@@ -1,6 +1,6 @@
 Package: curl
-Feature: schannel
+Feature: non-http
 Architecture: x64-windows
 Multi-Arch: same
-Description: SSL support (Secure Channel)
-Status: install ok installed
+Description: Enables protocols beyond HTTP/HTTPS/HTTP2
+Status: purge ok not-installed

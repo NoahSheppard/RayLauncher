@@ -11,6 +11,7 @@ public:
     { ACCOUNTS, CREDITS, SETTINGS };
     static void WindowClosed(MainFrame::WINDOWS window);
     std::string SetupResource(std::string fileName, int id);
+    static void FillDropdownWithAccounts(wxChoice* dropdown);
     
 private:
     void OnButtonClicked(wxCommandEvent& event);

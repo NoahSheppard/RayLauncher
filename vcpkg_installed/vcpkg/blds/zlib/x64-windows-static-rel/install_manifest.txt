@@ -1,0 +1,3 @@
+C:/Users/Noah/Desktop/Files/Programmioong/C++/RayLauncher/vcpkg_installed/vcpkg/pkgs/zlib_x64-windows-static/lib/zlib.lib
+C:/Users/Noah/Desktop/Files/Programmioong/C++/RayLauncher/vcpkg_installed/vcpkg/pkgs/zlib_x64-windows-static/include/zconf.h
+C:/Users/Noah/Desktop/Files/Programmioong/C++/RayLauncher/vcpkg_installed/vcpkg/pkgs/zlib_x64-windows-static/include/zlib.h

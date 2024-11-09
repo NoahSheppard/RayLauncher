@@ -1,0 +1,4 @@
+Name: nlohmann_json
+Description: JSON for Modern C++
+Version: 3.11.3
+Cflags: -IC:/Users/Noah/Desktop/Files/Programmioong/C++/RayLauncher/vcpkg_installed/vcpkg/pkgs/nlohmann-json_x64-windows-static/include

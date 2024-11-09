@@ -72,6 +72,7 @@ private:
             wxDouble textWidth, textHeight;
             gc->GetTextExtent(m_label, &textWidth, &textHeight);
             gc->DrawText(m_label, (rect.width - textWidth) / 2, (rect.height - textHeight) / 2);
+			gc->SetFont(wxFont(20, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_SEMIBOLD, false, "Burbank Big Rg Bd"), m_textColor);
 
             delete gc;
         }
