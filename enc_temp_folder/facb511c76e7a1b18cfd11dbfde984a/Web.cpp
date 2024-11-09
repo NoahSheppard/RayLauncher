@@ -19,6 +19,75 @@ size_t Web::WriteCallback(void* contents, size_t size, size_t nmemb, std::string
     }
 }
 
+/*std::string Web::POSTRequest(const std::string url, const std::string body, const std::list<std::string> headers) {
+    std::string response;
+    CURL* curl = curl_easy_init();
+    if (!curl) { return "Error: Failed to initialize CURL"; }
+
+    try {
+        struct curl_slist* rheaders = nullptr;
+        for (std::string header : headers) {
+            rheaders = curl_slist_append(rheaders, header.c_str());
+        }
+
+        curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+        curl_easy_setopt(curl, CURLOPT_HTTPHEADER, rheaders);
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);    
+        curl_easy_setopt(curl, CURLOPT_POSTFIELDS, body.c_str());
+        curl_easy_setopt(curl, CURLOPT_POST, 1L);
+
+        CURLcode res = curl_easy_perform(curl);
+        if (res != CURLE_OK) {
+            response = "Error: " + std::string(curl_easy_strerror(res));
+        }
+
+        curl_slist_free_all(rheaders);
+        curl_easy_cleanup(curl);
+    }
+    catch (const std::exception& e) { return "Error: Exception caught - " + std::string(e.what()); }
+
+    return response;
+}
+
+std::string Web::GETRequest(const std::string url, const std::list<std::string> headers) {
+    std::string response;
+    CURL* curl = curl_easy_init();
+    if (!curl) { return "Error: Failed to initialize CURL"; }
+
+    try {
+        struct curl_slist* rheaders = nullptr;
+        for (std::string header : headers) {
+            rheaders = curl_slist_append(rheaders, header.c_str());
+        }
+        curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+        curl_easy_setopt(curl, CURLOPT_HTTPHEADER, rheaders);
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);
+        curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "GET");
+
+
+        CURLcode res = curl_easy_perform(curl);
+        if (res != CURLE_OK) {
+            response = "Error: " + std::string(curl_easy_strerror(res));
+        }
+
+        curl_slist_free_all(rheaders);
+        curl_easy_cleanup(curl);
+    }
+    catch (const std::exception& e) { return "Error: Exception caught - " + std::string(e.what()); }
+
+    return response;
+}*/
+
+std::string Web::POSTRequest(const std::string url, const std::string body, const std::list<std::string> headers) {
+    return Web::Request(url, body, headers, Web::RequestType::POST);
+}
+
+std::string Web::GETRequest(const std::string url, const std::list<std::string> headers) {
+	return Web::Request(url, "", headers, Web::RequestType::GET);
+}
+
 std::string Web::Request(const std::string url, const std::string body, const std::list<std::string> headers, Web::RequestType type) {
     std::string response;
     CURL* curl = curl_easy_init();
@@ -42,7 +111,7 @@ std::string Web::Request(const std::string url, const std::string body, const st
             curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "GET");
         }
         else {
-            return "Error: Invalid function call";
+			return "Error: Invalid function call";
         }
 
 
@@ -57,14 +126,6 @@ std::string Web::Request(const std::string url, const std::string body, const st
     catch (const std::exception& e) { return "Error: Exception caught - " + std::string(e.what()); }
 
     return response;
-}
-
-std::string Web::POSTRequest(const std::string url, const std::string body, const std::list<std::string> headers) {
-    return Web::Request(url, body, headers, Web::RequestType::POST);
-}
-
-std::string Web::GETRequest(const std::string url, const std::list<std::string> headers) {
-	return Web::Request(url, "", headers, Web::RequestType::GET);
 }
 
 std::string Web::Login(std::string code) {

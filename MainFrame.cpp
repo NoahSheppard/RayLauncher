@@ -153,6 +153,7 @@ void MainFrame::OnButtonClicked(wxCommandEvent& event) {
         }
         else {                                                                                                      // only possible to be called if: is inside of rightpanel/is logic, or I fucked up somewhere
 			for (std::string button_id : buttonMap) {
+                wxLogStatus((wxString)std::to_string(button->GetId()));
 				std::vector<std::string> button_id_split = RayUtils::split(button_id, "_"); 
                 std::string __button_id = ((std::string)button_id_split[0] + (std::string)button_id_split[1]);      // turn button id from x_y to xy (i <3 c++)
 				if (button->GetId() == std::stoi(__button_id)) { 
@@ -342,12 +343,12 @@ void MainFrame::Logic(int id) {
 				std::string account_id = JSON::GetIdFromUsername((std::string)dropdown->GetStringSelection(), JSON::File::ACCOUNTS);
                 std::string bearer_token = Web::GetToken(account_id);
 				if (bearer_token.find("Error") != std::string::npos) {
-                    wxMessageBox((wxString)bearer_token, "RayLauncher - Account Settings", wxICON_ERROR);
+                    wxMessageBox("Error - Please select a different account, \nor re-login with the selected account", "RayLauncher - Account Settings", wxICON_ERROR);
                     break;
                 }
                 std::string exchange_code = Web::GetExchangeCodeWithBearer(bearer_token);
 				if (exchange_code.find("Error") != std::string::npos) {
-					wxMessageBox((wxString)exchange_code, "RayLauncher - Account Settings", wxICON_ERROR);
+					wxMessageBox("Error - this shouldn't have happened! \nPlease open an issue at \nhttps://github.com/NoahSheppard/RayLauncher\nAnd say: \"MainFrame.cpp, switch 22, second if\"", "RayLauncher - Account Settings", wxICON_ERROR);
 					break;
 				}
                 wxLaunchDefaultBrowser("https://www.epicgames.com/id/exchange?exchangeCode=" + exchange_code);

@@ -14,4 +14,5 @@ public:
     static std::string GetExchangeCodeWithBearer(std::string bearer_token);
 private:
     static size_t WriteCallback(void* contents, size_t size, size_t nmemb, std::string* userp);
+    static std::string Request(const std::string url, const std::string body, const std::list<std::string> headers, Web::RequestType type);
 };
