@@ -1,4 +1,6 @@
 {
+  "name": "raylauncher",
+  "version": "1.0.0",
   "dependencies": [
     "fmt",
     "nlohmann-json",

@@ -1,0 +1,1 @@
+C:/Users/Noah/Desktop/Files/Programmioong/C++/RayLauncher/vcpkg_installed/vcpkg/pkgs/zlib_x64-windows-static/debug/lib/zlibd.lib

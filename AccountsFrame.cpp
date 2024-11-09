@@ -100,15 +100,16 @@ void AccountsFrame::OnButtonClicked(wxCommandEvent& event) {
             LoadPageContent(buttonText.ToStdString());
         }
         else {                                                                                                      // only possible to be called if: is inside of rightpanel/is logic, or I fucked up somewhere
-            for (std::string button_id : buttonMap) {
-                wxLogStatus((wxString) button_id);
+            /*for (std::string button_id : buttonMap) {
                 std::vector<std::string> button_id_split = RayUtils::split(button_id, "_");
                 std::string __button_id = ((std::string)button_id_split[0] + (std::string)button_id_split[1]);      // turn button id from x_y to xy (i <3 c++)
                 if (button->GetId() == std::stoi(__button_id)) {
                     Logic(std::stoi(__button_id));
                     break;
                 }
-            }
+            }*/
+			Logic(button->GetId());
+            //break;
         }
     }
 }
@@ -127,20 +128,11 @@ void AccountsFrame::OnCloseWindow(wxCloseEvent& event) {
 
 void AccountsFrame::LoadPageContent(std::string page) {
     if (page == "Home") {
-        wxStaticText* accountName = new wxStaticText(rightPanel, wxID_ANY, "RayLauncher - Accounts", wxPoint(0, 5 + 35 + 35), wxDefaultSize);
-        wxFont font = wxFont(20, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD);
-        accountName->SetForegroundColour(wxColour(0xffffff));
-        accountName->SetFont(font);
-
-        wxClientDC dc(accountName);
-        dc.SetFont(font);
-        wxSize accountName_width = dc.GetTextExtent(accountName->GetLabelText());
-
-        accountName->SetPosition(wxPoint((420 / 2) - ((accountName_width.GetWidth()) / 2), 20));
+		wxStaticText* accountName = RayUtils::CreateCenteredText(rightPanel, 01, "RayLauncher - Accounts", 20, 20, true, RayUtils::Window::ACCOUNTS);
     }
     else if (page == "Exchange Code") {
-		wxStaticText* exchangeCode = RayUtils::CreateCenteredText(rightPanel, 11, "Exchange Code", 20, 20, true);
-		wxStaticText* exchangeCodeDesc = RayUtils::CreateCenteredText(rightPanel, 12, "Enter the code you received from the link", 60, 12, false);
+		wxStaticText* exchangeCode = RayUtils::CreateCenteredText(rightPanel, 11, "Exchange Code", 20, 20, true, RayUtils::Window::ACCOUNTS);
+		wxStaticText* exchangeCodeDesc = RayUtils::CreateCenteredText(rightPanel, 12, "Enter the code you received from the link", 60, 12, false, RayUtils::Window::ACCOUNTS);
 		exchangeCodeInput = new wxTextCtrl(rightPanel, 13, "", wxPoint(120, 103), wxSize(290, 20));
         wxHyperlinkCtrl* exchangeCodeLink = RayUtils::CreateHyperlink(rightPanel, 14, "Get Code", "https://www.epicgames.com/id/api/redirect?clientId=af43dc71dd91452396fcdffbd7a8e8a9&responseType=code", wxPoint(10, 100), 16);
         Bind(wxEVT_TEXT, &AccountsFrame::OnTextChanged, this);
@@ -152,6 +144,12 @@ void AccountsFrame::LoadPageContent(std::string page) {
 
 void AccountsFrame::Logic(int id) {
     if (id == 15) {
-        Web::Login((std::string)exchangeCodeInput->GetValue());
+        if (!(Web::Login((std::string)exchangeCodeInput->GetValue()) == "")) {
+            wxMessageBox("Exchange Code Invalid, try re-clicking the link\nIf the code is null, login first", "RayLauncher - Accounts", wxICON_ERROR);
+            exchangeCodeInput->SetValue("");
+        }
+        else {
+            exchangeCodeInput->SetValue("Account Added!");
+        }
     }
 }

@@ -31,7 +31,7 @@ events:
       Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.obj"
       
       The C compiler identification is MSVC, found in:
-        C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/detect_compiler/x64-windows-rel/CMakeFiles/3.31.0-rc2/CompilerIdC/CMakeCCompilerId.exe
+        C:/Users/Noah/Desktop/Files/Programmioong/C++/RayLauncher/vcpkg_installed/vcpkg/blds/detect_compiler/x64-windows-rel/CMakeFiles/3.31.0-rc2/CompilerIdC/CMakeCCompilerId.exe
       
   -
     kind: "message-v1"
@@ -43,7 +43,7 @@ events:
     message: |
       Detecting C compiler /showIncludes prefix:
         main.c
-        Note: including file: C:\\Users\\Noah\\Desktop\\Files\\Programmioong\\C++\\FirstGui\\vcpkg_installed\\vcpkg\\blds\\detect_compiler\\x64-windows-rel\\CMakeFiles\\ShowIncludes\\foo.h
+        Note: including file: C:\\Users\\Noah\\Desktop\\Files\\Programmioong\\C++\\RayLauncher\\vcpkg_installed\\vcpkg\\blds\\detect_compiler\\x64-windows-rel\\CMakeFiles\\ShowIncludes\\foo.h
         
       Found prefix "Note: including file: "
   -
@@ -69,7 +69,7 @@ events:
       Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.obj"
       
       The CXX compiler identification is MSVC, found in:
-        C:/Users/Noah/Desktop/Files/Programmioong/C++/FirstGui/vcpkg_installed/vcpkg/blds/detect_compiler/x64-windows-rel/CMakeFiles/3.31.0-rc2/CompilerIdCXX/CMakeCXXCompilerId.exe
+        C:/Users/Noah/Desktop/Files/Programmioong/C++/RayLauncher/vcpkg_installed/vcpkg/blds/detect_compiler/x64-windows-rel/CMakeFiles/3.31.0-rc2/CompilerIdCXX/CMakeCXXCompilerId.exe
       
   -
     kind: "message-v1"
@@ -81,7 +81,7 @@ events:
     message: |
       Detecting CXX compiler /showIncludes prefix:
         main.c
-        Note: including file: C:\\Users\\Noah\\Desktop\\Files\\Programmioong\\C++\\FirstGui\\vcpkg_installed\\vcpkg\\blds\\detect_compiler\\x64-windows-rel\\CMakeFiles\\ShowIncludes\\foo.h
+        Note: including file: C:\\Users\\Noah\\Desktop\\Files\\Programmioong\\C++\\RayLauncher\\vcpkg_installed\\vcpkg\\blds\\detect_compiler\\x64-windows-rel\\CMakeFiles\\ShowIncludes\\foo.h
         
       Found prefix "Note: including file: "
 ...

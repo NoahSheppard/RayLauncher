@@ -72,8 +72,13 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Dev\vcpkg\installed\x64-windows\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Dev\vcpkg\installed\x64-windows\include;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(VCPKG_ROOT)\installed\x64-windows-static\include;C:\Dev\vcpkg\installed\x64-windows\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(VCPKG_ROOT)\installed\x64-windows-static\lib;C:\Dev\vcpkg\installed\x64-windows\include;$(LibraryPath)</LibraryPath>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(VCPKG_ROOT)\installed\x64-windows-static\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>$(VCPKG_ROOT)\installed\x64-windows-static\lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Label="Vcpkg">
     <VcpkgEnableManifest>true</VcpkgEnableManifest>
@@ -117,14 +122,16 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>CURL_STATICLIB
+;_CRT_SECURE_NO_WARNINGS;FMT_STATIC_LINK;_CRT_SECURE_NO_WARNINGS;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\libraries\wxWidgets-3.2.6\include\msvc;C:\libraries\wxWidgets-3.2.6\include;C:\libraries\nlohmann;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\libraries\wxWidgets-3.2.6\include\msvc;C:\libraries\wxWidgets-3.2.6\include;C:\libraries\nlohmann;%(AdditionalIncludeDirectories);C:\Dev\vcpkg\installed\x64-windows\lib;C:\Dev\vcpkg\installed\x64-windows\include</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\libraries\wxWidgets-3.2.6\lib\vc_x64_lib;C:\Dev\vcpkg\installed\x64-windows\lib\libcurl.lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\libraries\wxWidgets-3.2.6\lib\vc_x64_lib;C:\Dev\vcpkg\installed\x64-windows\lib\libcurl.lib;C:\Dev\vcpkg\installed\x64-windows\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -133,16 +140,18 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>CURL_STATICLIB
+;_CRT_SECURE_NO_WARNINGS;FMT_STATIC_LINK;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;NDEBUG;_WINDOWS;FMT_STATIC_LINK;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\libraries\wxWidgets-3.2.6\include\msvc;C:\libraries\wxWidgets-3.2.6\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\libraries\wxWidgets-3.2.6\include\msvc;C:\libraries\wxWidgets-3.2.6\include;%(AdditionalIncludeDirectories);C:\Dev\vcpkg\installed\x64-windows\lib;C:\Dev\vcpkg\installed\x64-windows\include</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\libraries\wxWidgets-3.2.6\lib\vc_x64_lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\libraries\wxWidgets-3.2.6\lib\vc_x64_lib;;C:\Dev\vcpkg\installed\x64-windows\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

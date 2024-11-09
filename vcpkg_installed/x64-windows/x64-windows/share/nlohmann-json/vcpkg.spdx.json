@@ -3,13 +3,13 @@
   "spdxVersion": "SPDX-2.2",
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
-  "documentNamespace": "https://spdx.org/spdxdocs/nlohmann-json-x64-windows-3.11.3#1-d948781f-3f78-4584-b266-f04f57130121",
-  "name": "nlohmann-json:x64-windows@3.11.3#1 a6b73d55cba5658f24d6309f36d32a1ad7e3358c2eebb1b2f1fab73bad8a1b5f",
+  "documentNamespace": "https://spdx.org/spdxdocs/nlohmann-json-x64-windows-3.11.3-165dc1c8-208b-4098-818a-2beeab34208e",
+  "name": "nlohmann-json:x64-windows@3.11.3 0db380070bc481a23536e02ac1e6b33e8f5f8e64ec4e3c8cbf918f2e596ffea6",
   "creationInfo": {
     "creators": [
       "Tool: vcpkg-1c9ec1978a6b0c2b39c9e9554a96e3e275f7556e"
     ],
-    "created": "2024-10-23T06:43:55Z"
+    "created": "2024-11-04T06:19:18Z"
   },
   "relationships": [
     {
@@ -57,8 +57,8 @@
     {
       "name": "nlohmann-json",
       "SPDXID": "SPDXRef-port",
-      "versionInfo": "3.11.3#1",
-      "downloadLocation": "git+https://github.com/microsoft/vcpkg@324d32ddba70bc49650d1a067ddcf3d0bfc6c9b6",
+      "versionInfo": "3.11.3",
+      "downloadLocation": "git+https://github.com/microsoft/vcpkg@a728b86fa36d4885a4c57c79432660950644d6d4",
       "homepage": "https://github.com/nlohmann/json",
       "licenseConcluded": "MIT",
       "licenseDeclared": "NOASSERTION",
@@ -69,7 +69,7 @@
     {
       "name": "nlohmann-json:x64-windows",
       "SPDXID": "SPDXRef-binary",
-      "versionInfo": "a6b73d55cba5658f24d6309f36d32a1ad7e3358c2eebb1b2f1fab73bad8a1b5f",
+      "versionInfo": "0db380070bc481a23536e02ac1e6b33e8f5f8e64ec4e3c8cbf918f2e596ffea6",
       "downloadLocation": "NONE",
       "licenseConcluded": "MIT",
       "licenseDeclared": "NOASSERTION",
@@ -93,19 +93,19 @@
   ],
   "files": [
     {
-      "fileName": "./C:/Users/Noah/AppData/Local/vcpkg/registries/git-trees/324d32ddba70bc49650d1a067ddcf3d0bfc6c9b6/portfile.cmake",
+      "fileName": "./C:/Users/Noah/AppData/Local/vcpkg/registries/git-trees/a728b86fa36d4885a4c57c79432660950644d6d4/portfile.cmake",
       "SPDXID": "SPDXRef-file-0",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "cb2fc174d9a02003edc788b53286b21e25f29515c77e8f49a3f6df64594d1592"
+          "checksumValue": "c3898b87b74bbfa9406c8f6fcd2b8444339e1ebfd6a1a6ea312e6c4e06b92d4d"
         }
       ],
       "licenseConcluded": "NOASSERTION",
       "copyrightText": "NOASSERTION"
     },
     {
-      "fileName": "./C:/Users/Noah/AppData/Local/vcpkg/registries/git-trees/324d32ddba70bc49650d1a067ddcf3d0bfc6c9b6/usage",
+      "fileName": "./C:/Users/Noah/AppData/Local/vcpkg/registries/git-trees/a728b86fa36d4885a4c57c79432660950644d6d4/usage",
       "SPDXID": "SPDXRef-file-1",
       "checksums": [
         {
@@ -117,12 +117,12 @@
       "copyrightText": "NOASSERTION"
     },
     {
-      "fileName": "./C:/Users/Noah/AppData/Local/vcpkg/registries/git-trees/324d32ddba70bc49650d1a067ddcf3d0bfc6c9b6/vcpkg.json",
+      "fileName": "./C:/Users/Noah/AppData/Local/vcpkg/registries/git-trees/a728b86fa36d4885a4c57c79432660950644d6d4/vcpkg.json",
       "SPDXID": "SPDXRef-file-2",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "a0e818e4d0ca516126f28fcf647670ff93b6bc6342767533fbb2201ce48de9cf"
+          "checksumValue": "fbf9a5408475170983adb68233f33fca0d283b0ea6ecd6d5fc5bc32a39ac2f11"
         }
       ],
       "licenseConcluded": "NOASSERTION",

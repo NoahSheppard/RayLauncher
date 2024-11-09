@@ -1,0 +1,7 @@
+C:/Users/Noah/Desktop/Files/Programmioong/C++/RayLauncher/vcpkg_installed/x64-windows/vcpkg/blds/zlib/x64-windows-rel/CMakeFiles/zlib.dir
+C:/Users/Noah/Desktop/Files/Programmioong/C++/RayLauncher/vcpkg_installed/x64-windows/vcpkg/blds/zlib/x64-windows-rel/CMakeFiles/test.dir
+C:/Users/Noah/Desktop/Files/Programmioong/C++/RayLauncher/vcpkg_installed/x64-windows/vcpkg/blds/zlib/x64-windows-rel/CMakeFiles/edit_cache.dir
+C:/Users/Noah/Desktop/Files/Programmioong/C++/RayLauncher/vcpkg_installed/x64-windows/vcpkg/blds/zlib/x64-windows-rel/CMakeFiles/rebuild_cache.dir
+C:/Users/Noah/Desktop/Files/Programmioong/C++/RayLauncher/vcpkg_installed/x64-windows/vcpkg/blds/zlib/x64-windows-rel/CMakeFiles/list_install_components.dir
+C:/Users/Noah/Desktop/Files/Programmioong/C++/RayLauncher/vcpkg_installed/x64-windows/vcpkg/blds/zlib/x64-windows-rel/CMakeFiles/install.dir
+C:/Users/Noah/Desktop/Files/Programmioong/C++/RayLauncher/vcpkg_installed/x64-windows/vcpkg/blds/zlib/x64-windows-rel/CMakeFiles/install/local.dir

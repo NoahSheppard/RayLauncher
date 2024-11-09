@@ -3,13 +3,13 @@
   "spdxVersion": "SPDX-2.2",
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
-  "documentNamespace": "https://spdx.org/spdxdocs/curl-x64-windows-8.10.1#1-c270fe6f-e359-4e32-aacf-67c1e459347e",
-  "name": "curl:x64-windows@8.10.1#1 4ca0d812ccc5c223bc4e85e0bdfb29103f806fb1e2ed53480b22e789ee0f53f0",
+  "documentNamespace": "https://spdx.org/spdxdocs/curl-x64-windows-8.4.0-16ad70e4-ae05-4d48-ad64-ea71575475b2",
+  "name": "curl:x64-windows@8.4.0 67d4d407a47488734b1d380e77f63ff230be80fb58e591ba77f5d5b47806ae1f",
   "creationInfo": {
     "creators": [
       "Tool: vcpkg-1c9ec1978a6b0c2b39c9e9554a96e3e275f7556e"
     ],
-    "created": "2024-10-23T06:49:09Z"
+    "created": "2024-11-04T06:19:09Z"
   },
   "relationships": [
     {
@@ -73,6 +73,21 @@
       "relatedSpdxElement": "SPDXRef-file-10"
     },
     {
+      "spdxElementId": "SPDXRef-port",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-file-11"
+    },
+    {
+      "spdxElementId": "SPDXRef-port",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-file-12"
+    },
+    {
+      "spdxElementId": "SPDXRef-port",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-file-13"
+    },
+    {
       "spdxElementId": "SPDXRef-binary",
       "relationshipType": "GENERATED_FROM",
       "relatedSpdxElement": "SPDXRef-port"
@@ -131,14 +146,29 @@
       "spdxElementId": "SPDXRef-file-10",
       "relationshipType": "CONTAINED_BY",
       "relatedSpdxElement": "SPDXRef-port"
+    },
+    {
+      "spdxElementId": "SPDXRef-file-11",
+      "relationshipType": "CONTAINED_BY",
+      "relatedSpdxElement": "SPDXRef-port"
+    },
+    {
+      "spdxElementId": "SPDXRef-file-12",
+      "relationshipType": "CONTAINED_BY",
+      "relatedSpdxElement": "SPDXRef-port"
+    },
+    {
+      "spdxElementId": "SPDXRef-file-13",
+      "relationshipType": "CONTAINED_BY",
+      "relatedSpdxElement": "SPDXRef-port"
     }
   ],
   "packages": [
     {
       "name": "curl",
       "SPDXID": "SPDXRef-port",
-      "versionInfo": "8.10.1#1",
-      "downloadLocation": "git+https://github.com/microsoft/vcpkg@31d4981751582248fd2983bcadc540584a906a9a",
+      "versionInfo": "8.4.0",
+      "downloadLocation": "git+https://github.com/microsoft/vcpkg@6125c796d6e2913a89a2996d7082375ce16b02dd",
       "homepage": "https://curl.se/",
       "licenseConcluded": "curl AND ISC AND BSD-3-Clause",
       "licenseDeclared": "NOASSERTION",
@@ -149,7 +179,7 @@
     {
       "name": "curl:x64-windows",
       "SPDXID": "SPDXRef-binary",
-      "versionInfo": "4ca0d812ccc5c223bc4e85e0bdfb29103f806fb1e2ed53480b22e789ee0f53f0",
+      "versionInfo": "67d4d407a47488734b1d380e77f63ff230be80fb58e591ba77f5d5b47806ae1f",
       "downloadLocation": "NONE",
       "licenseConcluded": "curl AND ISC AND BSD-3-Clause",
       "licenseDeclared": "NOASSERTION",
@@ -166,15 +196,27 @@
       "checksums": [
         {
           "algorithm": "SHA512",
-          "checksumValue": "d8d0cdd291f37a6364201fc47e87302604ca5cb10a109818eb4bdd0215e16b6a56aac69f825417166d168f944b638fd15097f665e6e6933cd1a61ca341c3cb26"
+          "checksumValue": "c8550fef49e2f1571f7392a351e10bbdb23821069db1e988094fe27fe0a881a265ba69a2cd34462e630563d153462a975ef70472ba39adaad1c5e5ab45cf7f4f"
         }
       ]
     }
   ],
   "files": [
     {
-      "fileName": "./C:/Users/Noah/AppData/Local/vcpkg/registries/git-trees/31d4981751582248fd2983bcadc540584a906a9a/0005_remove_imp_suffix.patch",
+      "fileName": "./C:/Users/Noah/AppData/Local/vcpkg/registries/git-trees/6125c796d6e2913a89a2996d7082375ce16b02dd/0002_fix_uwp.patch",
       "SPDXID": "SPDXRef-file-0",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "7d57f6dbadbbff907937c57d315bae283336e410033fd6829f174a19f8ec7939"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "fileName": "./C:/Users/Noah/AppData/Local/vcpkg/registries/git-trees/6125c796d6e2913a89a2996d7082375ce16b02dd/0005_remove_imp_suffix.patch",
+      "SPDXID": "SPDXRef-file-1",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -185,92 +227,116 @@
       "copyrightText": "NOASSERTION"
     },
     {
-      "fileName": "./C:/Users/Noah/AppData/Local/vcpkg/registries/git-trees/31d4981751582248fd2983bcadc540584a906a9a/0020-fix-pc-file.patch",
-      "SPDXID": "SPDXRef-file-1",
-      "checksums": [
-        {
-          "algorithm": "SHA256",
-          "checksumValue": "c42b7c7560caaedf2b7dbb5fccb04fef9dbc9ab56a8147cebe4416a439894df8"
-        }
-      ],
-      "licenseConcluded": "NOASSERTION",
-      "copyrightText": "NOASSERTION"
-    },
-    {
-      "fileName": "./C:/Users/Noah/AppData/Local/vcpkg/registries/git-trees/31d4981751582248fd2983bcadc540584a906a9a/0022-deduplicate-libs.patch",
+      "fileName": "./C:/Users/Noah/AppData/Local/vcpkg/registries/git-trees/6125c796d6e2913a89a2996d7082375ce16b02dd/0012-fix-dependency-idn2.patch",
       "SPDXID": "SPDXRef-file-2",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "fb421f6e8726c4fd64b5e9cab974b5b5460d99d7e0988311ca9507c4f7b4b94b"
+          "checksumValue": "9d35f8f20b0e0605210310fa1275a974322d6305bdf170a160ecd5893db8cbf9"
         }
       ],
       "licenseConcluded": "NOASSERTION",
       "copyrightText": "NOASSERTION"
     },
     {
-      "fileName": "./C:/Users/Noah/AppData/Local/vcpkg/registries/git-trees/31d4981751582248fd2983bcadc540584a906a9a/cmake-config.patch",
+      "fileName": "./C:/Users/Noah/AppData/Local/vcpkg/registries/git-trees/6125c796d6e2913a89a2996d7082375ce16b02dd/0020-fix-pc-file.patch",
       "SPDXID": "SPDXRef-file-3",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "38892efe530ee792cb481d3ff23d59a734d96976a23524da9f15786583d54f12"
+          "checksumValue": "afe6f5e206f1dfa3b4606786d18f53701ec35211910437bd62010743d5dc943b"
         }
       ],
       "licenseConcluded": "NOASSERTION",
       "copyrightText": "NOASSERTION"
     },
     {
-      "fileName": "./C:/Users/Noah/AppData/Local/vcpkg/registries/git-trees/31d4981751582248fd2983bcadc540584a906a9a/cmake-project-include.cmake",
+      "fileName": "./C:/Users/Noah/AppData/Local/vcpkg/registries/git-trees/6125c796d6e2913a89a2996d7082375ce16b02dd/0022-deduplicate-libs.patch",
       "SPDXID": "SPDXRef-file-4",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "1ef932ac2d2496bd41d25c18b2cc064b4b1f3fe3e11c4ff90a5127f5cff167db"
+          "checksumValue": "fa3cc6a8181588f5e618dab8eb49a32a2ea2e7f1d3e00b0dfd3c04af36977566"
         }
       ],
       "licenseConcluded": "NOASSERTION",
       "copyrightText": "NOASSERTION"
     },
     {
-      "fileName": "./C:/Users/Noah/AppData/Local/vcpkg/registries/git-trees/31d4981751582248fd2983bcadc540584a906a9a/dependencies.patch",
+      "fileName": "./C:/Users/Noah/AppData/Local/vcpkg/registries/git-trees/6125c796d6e2913a89a2996d7082375ce16b02dd/cmake-config.patch",
       "SPDXID": "SPDXRef-file-5",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "5a296c9f0d5d2d7b237d886398ab80f4210d2d77f3a10764d240f751c623248f"
+          "checksumValue": "129a844d2552165ac30a5dfdde6c62257edf50af4e4753e819ae452c4469b0bb"
         }
       ],
       "licenseConcluded": "NOASSERTION",
       "copyrightText": "NOASSERTION"
     },
     {
-      "fileName": "./C:/Users/Noah/AppData/Local/vcpkg/registries/git-trees/31d4981751582248fd2983bcadc540584a906a9a/export-components.patch",
+      "fileName": "./C:/Users/Noah/AppData/Local/vcpkg/registries/git-trees/6125c796d6e2913a89a2996d7082375ce16b02dd/cmake-project-include.cmake",
       "SPDXID": "SPDXRef-file-6",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "4f8f3bbacc54b193b2c46f8ba63ccda5a8be7c1afd465d542650840ae00fe5ed"
+          "checksumValue": "3dc39481ad26f8886ff4b3861bc2f17599f1ce2f92d512d90d9a961c825f4fca"
         }
       ],
       "licenseConcluded": "NOASSERTION",
       "copyrightText": "NOASSERTION"
     },
     {
-      "fileName": "./C:/Users/Noah/AppData/Local/vcpkg/registries/git-trees/31d4981751582248fd2983bcadc540584a906a9a/portfile.cmake",
+      "fileName": "./C:/Users/Noah/AppData/Local/vcpkg/registries/git-trees/6125c796d6e2913a89a2996d7082375ce16b02dd/dependencies.patch",
       "SPDXID": "SPDXRef-file-7",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "b5498c7d19c2023e4bdcbe7818321966934f0ed39a74289a983af834a7e294a2"
+          "checksumValue": "5bcf78c137f0151382dcaaf9fd2d507a6d9d45d90eb3fb8e540634ee6aeaa247"
         }
       ],
       "licenseConcluded": "NOASSERTION",
       "copyrightText": "NOASSERTION"
     },
     {
-      "fileName": "./C:/Users/Noah/AppData/Local/vcpkg/registries/git-trees/31d4981751582248fd2983bcadc540584a906a9a/usage",
+      "fileName": "./C:/Users/Noah/AppData/Local/vcpkg/registries/git-trees/6125c796d6e2913a89a2996d7082375ce16b02dd/export-components.patch",
       "SPDXID": "SPDXRef-file-8",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "2062379fb7bb18507451dd770561def6a73e94ee7ca93297e9d846c8e5cfe437"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "fileName": "./C:/Users/Noah/AppData/Local/vcpkg/registries/git-trees/6125c796d6e2913a89a2996d7082375ce16b02dd/mbedtls-ws2_32.patch",
+      "SPDXID": "SPDXRef-file-9",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "07d7c1096ec64dc2f0b9ad893549d4031d606a72da37f566360dd1aa89039f8d"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "fileName": "./C:/Users/Noah/AppData/Local/vcpkg/registries/git-trees/6125c796d6e2913a89a2996d7082375ce16b02dd/portfile.cmake",
+      "SPDXID": "SPDXRef-file-10",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "d242fd4383bd74498770a885ebb54330b4eea7eaa4bcedb46c88495cbdb0b149"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "fileName": "./C:/Users/Noah/AppData/Local/vcpkg/registries/git-trees/6125c796d6e2913a89a2996d7082375ce16b02dd/usage",
+      "SPDXID": "SPDXRef-file-11",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -281,24 +347,24 @@
       "copyrightText": "NOASSERTION"
     },
     {
-      "fileName": "./C:/Users/Noah/AppData/Local/vcpkg/registries/git-trees/31d4981751582248fd2983bcadc540584a906a9a/vcpkg-cmake-wrapper.cmake",
-      "SPDXID": "SPDXRef-file-9",
+      "fileName": "./C:/Users/Noah/AppData/Local/vcpkg/registries/git-trees/6125c796d6e2913a89a2996d7082375ce16b02dd/vcpkg-cmake-wrapper.cmake",
+      "SPDXID": "SPDXRef-file-12",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "d8a56f83032c952df77b7610bc7640eb0d03971f75d0b2faa03aa3dadcc66e93"
+          "checksumValue": "583cfe42995ce7f3aafb8cde13d4a97dc1de9ee5eb8bcb53da26859c944a1f92"
         }
       ],
       "licenseConcluded": "NOASSERTION",
       "copyrightText": "NOASSERTION"
     },
     {
-      "fileName": "./C:/Users/Noah/AppData/Local/vcpkg/registries/git-trees/31d4981751582248fd2983bcadc540584a906a9a/vcpkg.json",
-      "SPDXID": "SPDXRef-file-10",
+      "fileName": "./C:/Users/Noah/AppData/Local/vcpkg/registries/git-trees/6125c796d6e2913a89a2996d7082375ce16b02dd/vcpkg.json",
+      "SPDXID": "SPDXRef-file-13",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "80d4425878c8c7f155ede01d700b0ec17c3fe8db0aa13f2a3a184b6e704a9ea5"
+          "checksumValue": "de33b4b3e44f0fd7aaa7699b34298962f2c952d8b28b68f952ceba014483783d"
         }
       ],
       "licenseConcluded": "NOASSERTION",

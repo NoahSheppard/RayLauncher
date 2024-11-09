@@ -15,6 +15,11 @@
 #include "AccountsFrame.h"
 #include <wx/file.h>
 #include <wx/filename.h>
+#include <vector>
+#include <wx/clipbrd.h>
+/*
+libcurl.dll MSVCP140D.dll VCRUNTIME140D.dll VCRUNTIME140_1D.dll
+*/
 
 using json = nlohmann::json;
 
@@ -44,9 +49,19 @@ const std::list<std::string> pagesMap = {
 };
 
 const std::list<std::string> buttonMap = {
-	"1_1", // 0_dropdown
-	"1_2", // 0_search
-	"1_3", // 0_lookup_button
+	"1_1", // 1_dropdown
+	"1_2", // 1_search
+	"1_3", // 1_lookup_button
+	"2_1", // 2_dropdown
+	"2_2", // 2_open_settings_button
+    "3_1", // 3_dropdown
+	"3_2", // 3_device_auth_button
+	"5_1", // 5_dropdown
+	"5_2", // 5_exchange_code_button
+    "7_1", // 7_dropdown
+	"7_2", // 7_launch_button
+	"8_1", // 8_dropdown
+	"8_2", // 8_research_button
 };
 
 MainFrame::MainFrame(const wxString& title)
@@ -229,22 +244,10 @@ void MainFrame::OnCloseWindow(wxCloseEvent& event) {
 
 void MainFrame::LoadPageContent(std::string page) { // change title code but I cba
     if (page == "Home") {
-        wxStaticText* accountName = new wxStaticText(rightPanel, wxID_ANY, "RayLauncher", wxPoint(0, 5 + 35 + 35), wxDefaultSize);
+        wxStaticText* titleText = RayUtils::CreateCenteredText(rightPanel, 01, "RayLauncher", 20, 30, true, RayUtils::Window::MAIN);
+        titleText->SetBackgroundColour(wxColour(0x55395d));
 
-        wxFont font = wxFont(30, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, "Burbank Big Rg Bd");
-        accountName->SetForegroundColour(wxColour(0xffffff));
-		accountName->SetFont(font);
-        accountName->SetBackgroundColour(wxColour(0x55395d));
-
-        wxClientDC dc(accountName);
-        dc.SetFont(font);
-        wxSize accountName_width = dc.GetTextExtent(accountName->GetLabelText());
-        accountName->SetPosition(wxPoint((560/2)-((accountName_width.GetWidth())/2), 20));
-
-        //Image
         m_image.LoadFile(SetupResource("RayLauncher.jpg", 111));
-
-        // Bind events
         rightPanel->Bind(wxEVT_PAINT, &MainFrame::OnPanelPaint, this);
         rightPanel->Bind(wxEVT_SIZE, [this](wxSizeEvent& evt) {
             rightPanel->Refresh();
@@ -252,70 +255,72 @@ void MainFrame::LoadPageContent(std::string page) { // change title code but I c
         });
     }
 
-    else if (page == "Account ID Lookup") {
-        wxArrayString choices; choices.Add("acc 1"); choices.Add("acc 2"); choices.Add("acc 3");
+    else if (page == "Account ID Lookup") { // BACKEND
+		wxChoice* accountsDropdown = new wxChoice(rightPanel, 11, wxPoint(10, 5), wxSize(225, 25));
+		MainFrame::FillDropdownWithAccounts(accountsDropdown);
 
-		wxChoice* accountsDropdown = new wxChoice(rightPanel, wxID_ANY, wxPoint(10, 5), wxSize(225, 25), choices);
-		//auto currentChoice = accountsDropdown->GetSelection(); // dont know type yet and I cba to figure it out
-
-		wxTextCtrl* searchInput = new wxTextCtrl(rightPanel, wxID_ANY, "Search", wxPoint(10+225+10, 5), wxSize(305, 25), wxTE_PROCESS_ENTER);
+		wxTextCtrl* searchInput = new wxTextCtrl(rightPanel, 12, "Search", wxPoint(10+225+10, 5), wxSize(305, 25), wxTE_PROCESS_ENTER);
 		searchInput->Bind(wxEVT_TEXT, &MainFrame::OnTextChanged, this);
 
         RoundedButton* logicButton = new RoundedButton(rightPanel, 13, "Lookup", wxPoint((10 + 225 + 10) + (153 - 63), 5 + 35), wxSize(125, 25), darkPurple);
         logicButton->Bind(wxEVT_BUTTON, &MainFrame::OnButtonClicked, this);
     }
 
-    else if (page == "Account Settings") {
-        wxTextCtrl* searchInput = new wxTextCtrl(rightPanel, wxID_ANY, "Search", wxPoint(10 + 225 + 10, 5), wxSize(305, 25), wxTE_PROCESS_ENTER);
-        searchInput->Bind(wxEVT_TEXT, &MainFrame::OnTextChanged, this);
-        nlohmann::json data = nlohmann::json::parse(R"({"pi": 3.141,"happy": true})");
-        std::string piValue = std::to_string(data["pi"].get<double>());
-        std::string happyValue = data["happy"].get<bool>() ? "true" : "false";
-        RoundedButton* logicButton = new RoundedButton(rightPanel, 13, happyValue,
-        wxPoint((10 + 225 + 10) + (153 - 63), 5 + 35), wxSize(125, 25), darkPurple);
+    else if (page == "Account Settings") { // DONE
+        wxChoice* accountsDropdown = new wxChoice(rightPanel, 21, wxPoint((560/2)-(225/2), 10), wxSize(225, 25));
+        MainFrame::FillDropdownWithAccounts(accountsDropdown);
+        RoundedButton* logicButton = new RoundedButton(rightPanel, 22, "Open Settings", wxPoint((560/2)-(125/2), 5 + 35), wxSize(125, 25), darkPurple); // (rightPanel / 2) - (buttonWidth / 2)
         logicButton->Bind(wxEVT_BUTTON, &MainFrame::OnButtonClicked, this);
-
-        
     }
 
-    else if (page == "Device Auth") {
-    //https://httpbin.org/ip 
-		//std::string webRequest = Web::webRequest("https://httpbin.org/ip", "", Web::RequestType::GET);
-		//nlohmann::json jsonObj = nlohmann::json::parse(webRequest);
-        //wxLogStatus("Test: " + (wxString)((std::string)jsonObj["origin"]) + " Should be your ip");
+    else if (page == "Device Auth") { // BACK/SCROLL
+        wxChoice* accountsDropdown = new wxChoice(rightPanel, 31, wxPoint((560 / 2) - (225 / 2), 10), wxSize(225, 25));
+        MainFrame::FillDropdownWithAccounts(accountsDropdown);
+        RoundedButton* logicButton = new RoundedButton(rightPanel, 32, "Device Auth", wxPoint((560 / 2) - (125 / 2), 5 + 35), wxSize(125, 25), darkPurple); // (rightPanel / 2) - (buttonWidth / 2)
+        logicButton->Bind(wxEVT_BUTTON, &MainFrame::OnButtonClicked, this);
     }
 
-    else if (page == "Friends List") { // will need scrolling code
+    else if (page == "Friends List") { // FRONT/BACK/SCROLL
         // List(Accounts)
         // Load Friends List Button
         //\n
         // Display Name Dialogue
         // Send Request Button
-        // Search Dialogue (will need event)
+        // Search Dialogue 
     }
 
-    else if (page == "Exchange Code") {
-        // List(Accounts)
-        // Logic Button
+	else if (page == "Exchange Code") { // FRONT/BACK
+        wxChoice* accountsDropdown = new wxChoice(rightPanel, 51, wxPoint((560 / 2) - (225 / 2), 10), wxSize(225, 25));
+        MainFrame::FillDropdownWithAccounts(accountsDropdown);
+        RoundedButton* logicButton = new RoundedButton(rightPanel, 52, "Exchange Code", wxPoint((560 / 2) - (125 / 2), 5 + 35), wxSize(125, 25), darkPurple); // (rightPanel / 2) - (buttonWidth / 2)
+        logicButton->Bind(wxEVT_BUTTON, &MainFrame::OnButtonClicked, this);
     }
 
-    else if (page == "Invite Players") { // will need scrolling code
+    else if (page == "Invite Players") { // FRONT/BACK/SCROLL
         // List(Accounts)
         // Logic Button
         // Search
     }
 
-    else if (page == "Launch Game") {
+    else if (page == "Launch Game") { // FRONT/BACK
         // List(Accounts)
         // Logic Button
+        wxChoice* accountsDropdown = new wxChoice(rightPanel, 71, wxPoint((560 / 2) - (225 / 2), 10), wxSize(225, 25));
+        MainFrame::FillDropdownWithAccounts(accountsDropdown);
+        RoundedButton* logicButton = new RoundedButton(rightPanel, 72, "Launch", wxPoint((560 / 2) - (125 / 2), 5 + 35), wxSize(125, 25), darkPurple); // (rightPanel / 2) - (buttonWidth / 2)
+        logicButton->Bind(wxEVT_BUTTON, &MainFrame::OnButtonClicked, this);
     }
 
-    else if (page == "Research Lab") {
+    else if (page == "Research Lab") { // FRONT/BACK
         // List(Accounts)
         // Logic Button
+        wxChoice* accountsDropdown = new wxChoice(rightPanel, 81, wxPoint((560 / 2) - (225 / 2), 10), wxSize(225, 25));
+        MainFrame::FillDropdownWithAccounts(accountsDropdown);
+        RoundedButton* logicButton = new RoundedButton(rightPanel, 82, "Load Research", wxPoint((560 / 2) - (125 / 2), 5 + 35), wxSize(125, 25), darkPurple); // (rightPanel / 2) - (buttonWidth / 2)
+        logicButton->Bind(wxEVT_BUTTON, &MainFrame::OnButtonClicked, this);
     }
 
-    else if (page == "Strom Shields") {
+    else if (page == "Strom Shields") { // FRONT/BACK/SCROLL
         // List(Accounts)
         // Logic Button
     }
@@ -326,10 +331,28 @@ void MainFrame::LoadPageContent(std::string page) { // change title code but I c
 }
 
 void MainFrame::Logic(int id) {
-    //std::string response = Web::webRequest("localhost:80/post", "", Web::RequestType::POST);
-    //nlohmann::json jsonObj = nlohmann::json::parse(response);
-    //std::cout << (std::string)jsonObj["origin"] << std::endl;
-    //wxLogStatus("Logic: " + (wxString)((std::string)jsonObj["origin"])); // logic placeholder
+    switch (id) {
+        case 22:
+			wxChoice *dropdown = (wxChoice*)wxChoice::FindWindowById(21);
+			if (dropdown->GetSelection() == -1) {
+                wxMessageBox("Please select an account!", "RayLauncher - Account Settings", wxICON_WARNING);
+			}
+			else {
+				std::string account_id = JSON::GetIdFromUsername((std::string)dropdown->GetStringSelection(), JSON::File::ACCOUNTS);
+                std::string bearer_token = Web::GetToken(account_id);
+				if (bearer_token.find("Error") != std::string::npos) {
+                    wxMessageBox((wxString)bearer_token, "RayLauncher - Account Settings", wxICON_ERROR);
+                    break;
+                }
+                std::string exchange_code = Web::GetExchangeCodeWithBearer(bearer_token);
+				if (exchange_code.find("Error") != std::string::npos) {
+					wxMessageBox((wxString)exchange_code, "RayLauncher - Account Settings", wxICON_ERROR);
+					break;
+				}
+                wxLaunchDefaultBrowser("https://www.epicgames.com/id/exchange?exchangeCode=" + exchange_code);
+			}
+            break;
+    }
 }
 
 void MainFrame::WindowClosed(MainFrame::WINDOWS window) {
@@ -345,6 +368,13 @@ void MainFrame::WindowClosed(MainFrame::WINDOWS window) {
 		    break;
 	    default:
 		    break;
+	}
+}
+
+void MainFrame::FillDropdownWithAccounts(wxChoice* dropdown) {
+	std::vector<std::string> data = JSON::GetAllUsers();
+	for (std::string account_id : data) {
+		dropdown->Append(JSON::GetAccountUsername(account_id, JSON::File::ACCOUNTS));
 	}
 }
 
