@@ -38,9 +38,9 @@ static bool FontCreated = false;
 
 const std::list<std::string> pagesMap = {
     "Home", // 99
-	"Account ID Lookup", // 0
+    "Account ID Lookup", // 0
     "Account Settings", // 1
-	"Device Auth", // 2
+    "Device Auth", // 2
     "Friends List", // 3
     "Exchange Code", // 4
     "Invite Players", // 5
@@ -50,19 +50,19 @@ const std::list<std::string> pagesMap = {
 };
 
 const std::list<std::string> buttonMap = {
-	"1_1", // 1_dropdown
-	"1_2", // 1_search
-	"1_3", // 1_lookup_button
-	"2_1", // 2_dropdown
-	"2_2", // 2_open_settings_button
+    "1_1", // 1_dropdown
+    "1_2", // 1_search
+    "1_3", // 1_lookup_button
+    "2_1", // 2_dropdown
+    "2_2", // 2_open_settings_button
     "3_1", // 3_dropdown
-	"3_2", // 3_device_auth_button
-	"5_1", // 5_dropdown
-	"5_2", // 5_exchange_code_button
+    "3_2", // 3_device_auth_button
+    "5_1", // 5_dropdown
+    "5_2", // 5_exchange_code_button
     "7_1", // 7_dropdown
-	"7_2", // 7_launch_button
-	"8_1", // 8_dropdown
-	"8_2", // 8_research_button
+    "7_2", // 7_launch_button
+    "8_1", // 8_dropdown
+    "8_2", // 8_research_button
 };
 
 MainFrame::MainFrame(const wxString& title)
@@ -70,10 +70,10 @@ MainFrame::MainFrame(const wxString& title)
         wxDEFAULT_FRAME_STYLE & ~(wxRESIZE_BORDER | wxMAXIMIZE_BOX))
 {
     wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
-    
+
     // Top
     wxPanel* topPanel = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTRANSPARENT_WINDOW);
-    RoundedButton* topButton = new RoundedButton(topPanel, wxID_ANY, "Accounts", wxPoint(0,0), wxSize(70, 30), lightColour);
+    RoundedButton* topButton = new RoundedButton(topPanel, wxID_ANY, "Accounts", wxPoint(0, 0), wxSize(70, 30), lightColour);
     topButton->Bind(wxEVT_BUTTON, &MainFrame::OnButtonClicked, this);
     RoundedButton* topButton2 = new RoundedButton(topPanel, wxID_ANY, "Credits", wxPoint(70, 0), wxSize(70, 30), lightColour);
     topButton2->Bind(wxEVT_BUTTON, &MainFrame::OnButtonClicked, this);
@@ -81,7 +81,7 @@ MainFrame::MainFrame(const wxString& title)
     topButton3->Bind(wxEVT_BUTTON, &MainFrame::OnButtonClicked, this);
 
     mainSizer->Add(topPanel, 0, wxEXPAND);
-	mainSizer->SetItemMinSize(topPanel, -1, 30);
+    mainSizer->SetItemMinSize(topPanel, -1, 30);
 
     SetBackgroundColour(lightColour);
     SetSizer(mainSizer);
@@ -91,30 +91,30 @@ MainFrame::MainFrame(const wxString& title)
     // Left
     wxPanel* leftPanel = new wxPanel(this, wxID_ANY); // creates the panel
     leftPanel->SetBackgroundColour(lightColour); // sets colour
-	wxBoxSizer* leftSizer = new wxBoxSizer(wxVERTICAL); // creates sizer
+    wxBoxSizer* leftSizer = new wxBoxSizer(wxVERTICAL); // creates sizer
     int leftButtonIndex = 0;
     for (std::string page : pagesMap) {
-        RoundedButton* _l_button = new RoundedButton(leftPanel, wxID_ANY, page, wxPoint(5, (5 + (30 * leftButtonIndex))), wxSize(230,25), darkPurple);
+        RoundedButton* _l_button = new RoundedButton(leftPanel, wxID_ANY, page, wxPoint(5, (5 + (30 * leftButtonIndex))), wxSize(230, 25), darkPurple);
         _l_button->Bind(wxEVT_BUTTON, &MainFrame::OnButtonClicked, this);
         leftButtonIndex++;
     } // Left panel buttons
-	leftPanel->SetSizer(leftSizer); // sets sizer
+    leftPanel->SetSizer(leftSizer); // sets sizer
 
     // Right Panel 
     rightPanel = new wxPanel(this, wxID_ANY); // makes right panel
     rightPanel->SetBackgroundColour(darkColour); // sets colour
-	rightSizer = new wxBoxSizer(wxVERTICAL); // makes sizer
-	rightPanel->SetSizer(rightSizer); // sets sizer
+    rightSizer = new wxBoxSizer(wxVERTICAL); // makes sizer
+    rightPanel->SetSizer(rightSizer); // sets sizer
 
     // Add panels to horizontal sizer with proportion
     horizontalSizer->Add(leftPanel, 30, wxEXPAND); // L
     horizontalSizer->Add(rightPanel, 70, wxEXPAND); // R
     mainSizer->Add(horizontalSizer, 1, wxEXPAND); // T
-	SetSizer(mainSizer); // sets main sizer
+    SetSizer(mainSizer); // sets main sizer
     CreateStatusBar(); // debug bottom bar
     SetupIcon();
     SetupFont();
-	LoadPageContent("Home"); // go!!!
+    LoadPageContent("Home"); // go!!!
     Bind(wxEVT_CLOSE_WINDOW, &MainFrame::OnCloseWindow, this);
 
 }
@@ -122,44 +122,45 @@ MainFrame::MainFrame(const wxString& title)
 // # ------------------------------------------------------------------------------------------ Events
 
 void MainFrame::OnButtonClicked(wxCommandEvent& event) {
-    wxButton* button = dynamic_cast<wxButton*>(event.GetEventObject());                                             
-    if (button) { }                                                                                                 // no reg buttons used, this should never be called
-	else {                                                                                                          // the only 2 things that call MainFrame::OnButtonClicked is wxButton and RoundedButton
-		RoundedButton* button = dynamic_cast<RoundedButton*>(event.GetEventObject());
+    wxButton* button = dynamic_cast<wxButton*>(event.GetEventObject());
+    if (button) {}                                                                                                 // no reg buttons used, this should never be called
+    else {                                                                                                          // the only 2 things that call MainFrame::OnButtonClicked is wxButton and RoundedButton
+        RoundedButton* button = dynamic_cast<RoundedButton*>(event.GetEventObject());
         wxString buttonText = button->GetNewLabel();
         if (buttonText == "Accounts" || buttonText == "Credits" || buttonText == "Settings") {
             if (buttonText == "Accounts") {
                 if (!accountsWindowOpen) {
                     AccountsWindow::OnInit();
-					accountsWindowOpen = true;
+                    accountsWindowOpen = true;
                 }
             }
-			else if (buttonText == "Credits") {
-				if (!creditsWindowOpen) {
+            else if (buttonText == "Credits") {
+                if (!creditsWindowOpen) {
                     //CreditsWindow::OnInit();
-					creditsWindowOpen = true;
-				}
-			}
-			else if (buttonText == "Settings") {
-				if (!settingsWindowOpen) {
-					//SettingsWindow::OnInit();
-					settingsWindowOpen = true;
-				}
-			}
+                    creditsWindowOpen = true;
+                }
+            }
+            else if (buttonText == "Settings") {
+                if (!settingsWindowOpen) {
+                    //SettingsWindow::OnInit();
+                    settingsWindowOpen = true;
+                }
+            }
         }
         else if (std::find(pagesMap.begin(), pagesMap.end(), buttonText.ToStdString()) != pagesMap.end()) {         // if in pagesMap list
-            rightPanel->DestroyChildren(); 
-            LoadPageContent(buttonText.ToStdString()); 
+            rightPanel->DestroyChildren();
+            LoadPageContent(buttonText.ToStdString());
         }
         else {                                                                                                      // only possible to be called if: is inside of rightpanel/is logic, or I fucked up somewhere
-			for (std::string button_id : buttonMap) {
-				std::vector<std::string> button_id_split = RayUtils::split(button_id, "_"); 
+            for (std::string button_id : buttonMap) {
+                wxLogStatus((wxString)std::to_string(button->GetId()));
+                std::vector<std::string> button_id_split = RayUtils::split(button_id, "_");
                 std::string __button_id = ((std::string)button_id_split[0] + (std::string)button_id_split[1]);      // turn button id from x_y to xy (i <3 c++)
-				if (button->GetId() == std::stoi(__button_id)) { 
-                    Logic(std::stoi(__button_id)); 
+                if (button->GetId() == std::stoi(__button_id)) {
+                    Logic(std::stoi(__button_id));
                     break;
-				}
-			}
+                }
+            }
         }
     }
 }
@@ -253,24 +254,24 @@ void MainFrame::LoadPageContent(std::string page) { // change title code but I c
         rightPanel->Bind(wxEVT_SIZE, [this](wxSizeEvent& evt) {
             rightPanel->Refresh();
             evt.Skip();
-        });
+            });
     }
 
     else if (page == "Account ID Lookup") { // BACKEND
-		wxChoice* accountsDropdown = new wxChoice(rightPanel, 11, wxPoint(10, 5), wxSize(225, 25));
-		MainFrame::FillDropdownWithAccounts(accountsDropdown);
+        wxChoice* accountsDropdown = new wxChoice(rightPanel, 11, wxPoint(10, 5), wxSize(225, 25));
+        MainFrame::FillDropdownWithAccounts(accountsDropdown);
 
-		wxTextCtrl* searchInput = new wxTextCtrl(rightPanel, 12, "Search", wxPoint(10+225+10, 5), wxSize(305, 25), wxTE_PROCESS_ENTER);
-		searchInput->Bind(wxEVT_TEXT, &MainFrame::OnTextChanged, this);
+        wxTextCtrl* searchInput = new wxTextCtrl(rightPanel, 12, "Search", wxPoint(10 + 225 + 10, 5), wxSize(305, 25), wxTE_PROCESS_ENTER);
+        searchInput->Bind(wxEVT_TEXT, &MainFrame::OnTextChanged, this);
 
         RoundedButton* logicButton = new RoundedButton(rightPanel, 13, "Lookup", wxPoint((10 + 225 + 10) + (153 - 63), 5 + 35), wxSize(125, 25), darkPurple);
         logicButton->Bind(wxEVT_BUTTON, &MainFrame::OnButtonClicked, this);
     }
 
     else if (page == "Account Settings") { // DONE
-        wxChoice* accountsDropdown = new wxChoice(rightPanel, 21, wxPoint((560/2)-(225/2), 10), wxSize(225, 25));
+        wxChoice* accountsDropdown = new wxChoice(rightPanel, 21, wxPoint((560 / 2) - (225 / 2), 10), wxSize(225, 25));
         MainFrame::FillDropdownWithAccounts(accountsDropdown);
-        RoundedButton* logicButton = new RoundedButton(rightPanel, 22, "Open Settings", wxPoint((560/2)-(125/2), 5 + 35), wxSize(125, 25), darkPurple); // (rightPanel / 2) - (buttonWidth / 2)
+        RoundedButton* logicButton = new RoundedButton(rightPanel, 22, "Open Settings", wxPoint((560 / 2) - (125 / 2), 5 + 35), wxSize(125, 25), darkPurple); // (rightPanel / 2) - (buttonWidth / 2)
         logicButton->Bind(wxEVT_BUTTON, &MainFrame::OnButtonClicked, this);
     }
 
@@ -290,7 +291,7 @@ void MainFrame::LoadPageContent(std::string page) { // change title code but I c
         // Search Dialogue 
     }
 
-	else if (page == "Exchange Code") { // FRONT/BACK
+    else if (page == "Exchange Code") { // FRONT/BACK
         wxChoice* accountsDropdown = new wxChoice(rightPanel, 51, wxPoint((560 / 2) - (225 / 2), 10), wxSize(225, 25));
         MainFrame::FillDropdownWithAccounts(accountsDropdown);
         RoundedButton* logicButton = new RoundedButton(rightPanel, 52, "Exchange Code", wxPoint((560 / 2) - (125 / 2), 5 + 35), wxSize(125, 25), darkPurple); // (rightPanel / 2) - (buttonWidth / 2)
@@ -333,50 +334,50 @@ void MainFrame::LoadPageContent(std::string page) { // change title code but I c
 
 void MainFrame::Logic(int id) {
     switch (id) {
-        case 22:
-			wxChoice *dropdown = (wxChoice*)wxChoice::FindWindowById(21);
-			if (dropdown->GetSelection() == -1) {
-                wxMessageBox("Please select an account!", "RayLauncher - Account Settings", wxICON_WARNING);
-			}
-			else {
-				std::string account_id = JSON::GetIdFromUsername((std::string)dropdown->GetStringSelection(), JSON::File::ACCOUNTS);
-                std::string bearer_token = Web::GetToken(account_id);
-				if (bearer_token.find("Error") != std::string::npos) {
-                    wxMessageBox((wxString)bearer_token, "RayLauncher - Account Settings", wxICON_ERROR);
-                    break;
-                }
-                std::string exchange_code = Web::GetExchangeCodeWithBearer(bearer_token);
-				if (exchange_code.find("Error") != std::string::npos) {
-					wxMessageBox((wxString)exchange_code, "RayLauncher - Account Settings", wxICON_ERROR);
-					break;
-				}
-                wxLaunchDefaultBrowser("https://www.epicgames.com/id/exchange?exchangeCode=" + exchange_code);
-			}
-            break;
+    case 22:
+        wxChoice * dropdown = (wxChoice*)wxChoice::FindWindowById(21);
+        if (dropdown->GetSelection() == -1) {
+            wxMessageBox("Please select an account!", "RayLauncher - Account Settings", wxICON_WARNING);
+        }
+        else {
+            std::string account_id = JSON::GetIdFromUsername((std::string)dropdown->GetStringSelection(), JSON::File::ACCOUNTS);
+            std::string bearer_token = Web::GetToken(account_id);
+            if (bearer_token.find("Error") != std::string::npos) {
+                wxMessageBox("Error - Please select a different account, \nor re-login with the selected account", "RayLauncher - Account Settings", wxICON_ERROR);
+                break;
+            }
+            std::string exchange_code = Web::GetExchangeCodeWithBearer(bearer_token);
+            if (exchange_code.find("Error") != std::string::npos) {
+                wxMessageBox("Error - this shouldn't have happened! \nPlease open an issue at \nhttps://github.com/NoahSheppard/RayLauncher\nAnd say: \"MainFrame.cpp, switch 22, second if\"", "RayLauncher - Account Settings", wxICON_ERROR);
+                break;
+            }
+            wxLaunchDefaultBrowser("https://www.epicgames.com/id/exchange?exchangeCode=" + exchange_code);
+        }
+        break;
     }
 }
 
 void MainFrame::WindowClosed(MainFrame::WINDOWS window) {
-	switch (window) {
-        case MainFrame::WINDOWS::ACCOUNTS:
-		    accountsWindowOpen = false;
-		    break;
-	    case MainFrame::WINDOWS::CREDITS:
-		    creditsWindowOpen = false;
-		    break;
-	    case MainFrame::WINDOWS::SETTINGS:
-		    settingsWindowOpen = false;
-		    break;
-	    default:
-		    break;
-	}
+    switch (window) {
+    case MainFrame::WINDOWS::ACCOUNTS:
+        accountsWindowOpen = false;
+        break;
+    case MainFrame::WINDOWS::CREDITS:
+        creditsWindowOpen = false;
+        break;
+    case MainFrame::WINDOWS::SETTINGS:
+        settingsWindowOpen = false;
+        break;
+    default:
+        break;
+    }
 }
 
 void MainFrame::FillDropdownWithAccounts(wxChoice* dropdown) {
-	std::vector<std::string> data = JSON::GetAllUsers();
-	for (std::string account_id : data) {
-		dropdown->Append(JSON::GetAccountUsername(account_id, JSON::File::ACCOUNTS));
-	}
+    std::vector<std::string> data = JSON::GetAllUsers();
+    for (std::string account_id : data) {
+        dropdown->Append(JSON::GetAccountUsername(account_id, JSON::File::ACCOUNTS));
+    }
 }
 
 
