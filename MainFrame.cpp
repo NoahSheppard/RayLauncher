@@ -30,6 +30,7 @@ const wxColour lightColour = wxColour(0x202020);
 const wxColour darkColour = wxColour(0x0a0a0a);
 wxPanel* rightPanel;
 wxBoxSizer* rightSizer;
+wxWindow* WINDOW;
 
 bool MainFrame::accountsWindowOpen = false;
 bool MainFrame::creditsWindowOpen = false;
@@ -70,6 +71,7 @@ MainFrame::MainFrame(const wxString& title)
         wxDEFAULT_FRAME_STYLE & ~(wxRESIZE_BORDER | wxMAXIMIZE_BOX))
 {
     wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
+    WINDOW = this;
 
     // Top
     wxPanel* topPanel = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTRANSPARENT_WINDOW);
@@ -116,6 +118,8 @@ MainFrame::MainFrame(const wxString& title)
     SetupFont();
     LoadPageContent("Home"); // go!!!
     Bind(wxEVT_CLOSE_WINDOW, &MainFrame::OnCloseWindow, this);
+    std::ofstream outFile("accounts.json");
+    outFile << "{}" << std::endl; outFile.close();
 
 }
 
@@ -123,7 +127,7 @@ MainFrame::MainFrame(const wxString& title)
 
 void MainFrame::OnButtonClicked(wxCommandEvent& event) {
     wxButton* button = dynamic_cast<wxButton*>(event.GetEventObject());
-    if (button) {}                                                                                                 // no reg buttons used, this should never be called
+    if (button) {}                                                                                                 // no reg buttons used, this should never be called..
     else {                                                                                                          // the only 2 things that call MainFrame::OnButtonClicked is wxButton and RoundedButton
         RoundedButton* button = dynamic_cast<RoundedButton*>(event.GetEventObject());
         wxString buttonText = button->GetNewLabel();
@@ -136,7 +140,7 @@ void MainFrame::OnButtonClicked(wxCommandEvent& event) {
             }
             else if (buttonText == "Credits") {
                 if (!creditsWindowOpen) {
-                    //CreditsWindow::OnInit();
+                    ShowCreditsDialog(WINDOW);
                     creditsWindowOpen = true;
                 }
             }
@@ -175,8 +179,7 @@ void MainFrame::OnPanelPaint(wxPaintEvent& evt)
 {
     wxPaintDC dc(rightPanel);
 
-    if (!m_image.IsOk())
-    {
+    if (!m_image.IsOk()){
         wxLogMessage("No valid image to paint");
         return;
     }
@@ -375,9 +378,25 @@ void MainFrame::WindowClosed(MainFrame::WINDOWS window) {
 
 void MainFrame::FillDropdownWithAccounts(wxChoice* dropdown) {
     std::vector<std::string> data = JSON::GetAllUsers();
+	if (data.size() == 0) { return; } // no accounts
     for (std::string account_id : data) {
         dropdown->Append(JSON::GetAccountUsername(account_id, JSON::File::ACCOUNTS));
     }
+}
+
+void MainFrame::ShowCreditsDialog(wxWindow* parent) {
+    wxMessageDialog* dialog = new wxMessageDialog(
+        parent,
+        "Developers: Noah Sheppard (NOAHBENJ)\nGitHub: https://github.com/NoahSheppard/RayLauncher/",
+        "RayLauncher - Credits",
+        wxOK | wxCENTRE | wxICON_INFORMATION
+    );
+
+    // Disable the alert sound
+    dialog->SetYesNoLabels("OK", "");
+
+    dialog->ShowModal();
+    dialog->Destroy();
 }
 
 
