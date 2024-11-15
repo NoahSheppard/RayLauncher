@@ -54,14 +54,19 @@ const std::list<std::string> buttonMap = {
     "1_1", // 1_dropdown
     "1_2", // 1_search
     "1_3", // 1_lookup_button
+
     "2_1", // 2_dropdown
     "2_2", // 2_open_settings_button
+
     "3_1", // 3_dropdown
     "3_2", // 3_device_auth_button
+
     "5_1", // 5_dropdown
     "5_2", // 5_exchange_code_button
+
     "7_1", // 7_dropdown
     "7_2", // 7_launch_button
+
     "8_1", // 8_dropdown
     "8_2", // 8_research_button
 };
@@ -118,8 +123,10 @@ MainFrame::MainFrame(const wxString& title)
     SetupFont();
     LoadPageContent("Home"); // go!!!
     Bind(wxEVT_CLOSE_WINDOW, &MainFrame::OnCloseWindow, this);
-    std::ofstream outFile("accounts.json");
-    outFile << "{}" << std::endl; outFile.close();
+    //std::ofstream outFile("accounts.json");
+    //outFile << "{}" << std::endl; outFile.close();
+    // TODO: CHECK IF ACCOUNTS FILE EXISTS FIRST, IF NOT, THEN CREATE IT
+    // RETARD
 
 }
 
@@ -350,28 +357,67 @@ void MainFrame::LoadPageContent(std::string page) { // change title code but I c
 }
 
 void MainFrame::Logic(int id) {
-    switch (id) {
-        case 22:
-            wxChoice * dropdown = (wxChoice*)wxChoice::FindWindowById(21);
-            if (dropdown->GetSelection() == -1) {
-                wxMessageBox("Please select an account!", "RayLauncher - Account Settings", wxICON_WARNING);
-            }
-            else {
-                std::string account_id = JSON::GetIdFromUsername((std::string)dropdown->GetStringSelection(), JSON::File::ACCOUNTS);
-                std::string bearer_token = Web::GetToken(account_id);
-                if (bearer_token.find("Error") != std::string::npos) {
-                    wxMessageBox("Error - Please select a different account, \nor re-login with the selected account", "RayLauncher - Account Settings", wxICON_ERROR);
-                    break;
-                }
-                std::string exchange_code = Web::GetExchangeCodeWithBearer(bearer_token);
-                if (exchange_code.find("Error") != std::string::npos) {
-                    wxMessageBox("Error - this shouldn't have happened! \nPlease open an issue at \nhttps://github.com/NoahSheppard/RayLauncher\nAnd say: \"MainFrame.cpp, switch 22, second if\"", "RayLauncher - Account Settings", wxICON_ERROR);
-                    break;
-                }
-                wxLaunchDefaultBrowser("https://www.epicgames.com/id/exchange?exchangeCode=" + exchange_code);
-            }
-            break;
-    }
+    if (id == 13) {
+        wxChoice* dropdown = (wxChoice*)wxChoice::FindWindowById(11);
+        bool getUsernameFromDropdown;
+		dropdown->GetSelection() == -1 ? getUsernameFromDropdown = false : getUsernameFromDropdown = true;
+        std::string account_id;
+        std::string loggedInAccountId;
+        if (getUsernameFromDropdown) { 
+            account_id = JSON::GetIdFromUsername((std::string)dropdown->GetStringSelection(), JSON::File::ACCOUNTS); 
+            loggedInAccountId = account_id;
+        }
+        else { 
+            wxTextCtrl* searchInput = (wxTextCtrl*)wxTextCtrl::FindWindowById(12); account_id = searchInput->GetValue(); 
+        }
+        std::vector<std::string> accounts = JSON::GetAllUsers();
+        if (accounts.size() == 0) {
+			wxMessageBox("No accounts found!", "RayLauncher - Account ID Lookup", wxICON_WARNING);
+            return;
+		}
+        else {
+			loggedInAccountId = accounts[0];
+        }
+        std::string bearer_token = Web::GetToken(loggedInAccountId);
+        if (bearer_token.find("Error") != std::string::npos) { wxMessageBox("Error - Please select a different account, \nor re-login with the selected account", "RayLauncher - Account Settings", wxICON_ERROR); }
+        return;
+	}
+	else if (id == 22) {
+        wxChoice* dropdown = (wxChoice*)wxChoice::FindWindowById(21);
+        if (dropdown->GetSelection() == -1) {
+            wxMessageBox("Please select an account!", "RayLauncher - Account Settings", wxICON_WARNING);
+            return;
+        }
+        else {
+            std::string account_id = JSON::GetIdFromUsername((std::string)dropdown->GetStringSelection(), JSON::File::ACCOUNTS);
+            std::string bearer_token = Web::GetToken(account_id);
+            if (bearer_token.find("Error") != std::string::npos) { wxMessageBox("Error - Please select a different account, \nor re-login with the selected account", "RayLauncher - Account Settings", wxICON_ERROR);}
+            std::string exchange_code = Web::GetExchangeCodeWithBearer(bearer_token);
+            if (exchange_code.find("Error") != std::string::npos) { wxMessageBox("Error - this shouldn't have happened! \nPlease open an issue at \nhttps://github.com/NoahSheppard/RayLauncher\nAnd say: \"MainFrame.cpp, switch 22, second if\"", "RayLauncher - Account Settings", wxICON_ERROR); }
+            wxLaunchDefaultBrowser("https://www.epicgames.com/id/exchange?exchangeCode=" + exchange_code);
+        }
+        return;
+	}
+
+	else if (id == 32) {
+
+	}
+
+	else if (id == 52) {
+
+	}
+
+	else if (id == 72) {
+
+	}
+
+	else if (id == 82) {
+
+	}
+
+	else {
+		wxLogStatus((wxString)"Button ID: " + std::to_string(id) + ". This should not have happened! Open an issue at https://github.com/NoahSheppard/RayLauncher with the button id!");
+	}
 }
 
 void MainFrame::WindowClosed(MainFrame::WINDOWS window) {
