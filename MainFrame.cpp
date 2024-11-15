@@ -261,7 +261,6 @@ void MainFrame::LoadPageContent(std::string page) { // change title code but I c
     }
 
     else if (page == "Account ID Lookup") {
-        // Keep existing top controls
         wxChoice* accountsDropdown = new wxChoice(rightPanel, 11, wxPoint(10, 5), wxSize(225, 25));
         MainFrame::FillDropdownWithAccounts(accountsDropdown);
 
@@ -271,41 +270,18 @@ void MainFrame::LoadPageContent(std::string page) { // change title code but I c
         RoundedButton* logicButton = new RoundedButton(rightPanel, 13, "Lookup", wxPoint((10 + 225 + 10) + (153 - 63), 5 + 35), wxSize(125, 25), darkPurple);
         logicButton->Bind(wxEVT_BUTTON, &MainFrame::OnButtonClicked, this);
 
-        // Create scrolled window for buttons
-        wxScrolledWindow* scrolledWindow = new wxScrolledWindow(rightPanel, wxID_ANY,
-            wxPoint(10, 75),  // Position below existing controls
-            wxSize(540, 480)  // Adjust size as needed
-        );
-
-        // Create a vertical sizer for the scrolled window
+        wxScrolledWindow* scrolledWindow = new wxScrolledWindow(rightPanel, wxID_ANY, wxPoint(10, 75), wxSize(540, 480));
         wxBoxSizer* scrollSizer = new wxBoxSizer(wxVERTICAL);
 
-        // Add 30 RoundedButtons
         for (int i = 1; i <= 20; i++) {
-            RoundedButton* btn = new RoundedButton(
-                scrolledWindow,             // Parent is scrolled window
-                wxID_ANY,                   // ID
-                wxString::Format("Button %d", i), // Label
-                wxDefaultPosition,          // Position handled by sizer
-                wxSize(500, 25),           // Size of each button
-                darkPurple                  // Using your existing color
-            );
+            RoundedButton* btn = new RoundedButton( scrolledWindow, wxID_ANY, wxString::Format("Button %d", i), wxDefaultPosition, wxSize(500, 25), darkPurple );
             btn->Bind(wxEVT_BUTTON, &MainFrame::OnButtonClicked, this);
-
-            // Add button to sizer with some spacing
             scrollSizer->Add(btn, 0, wxALL | wxEXPAND, 5);
         }
 
-        // Set the sizer for the scrolled window
         scrolledWindow->SetSizer(scrollSizer);
-
-        // Calculate the total size needed
-        scrolledWindow->FitInside();  // Tell the scrolled window to calculate the total size
-
-        // Set the scroll rate (in pixels per scroll unit)
-        scrolledWindow->SetScrollRate(0, 20);  // Vertical scrolling only
-
-        // Set background color for the scrolled window
+        scrolledWindow->FitInside();
+        scrolledWindow->SetScrollRate(0, 20);
         scrolledWindow->SetBackgroundColour(darkColour);
     }
 
