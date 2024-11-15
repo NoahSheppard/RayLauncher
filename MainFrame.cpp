@@ -22,6 +22,32 @@ libcurl.dll MSVCP140D.dll VCRUNTIME140D.dll VCRUNTIME140_1D.dll
 // DLL's that dont work
 */
 
+// TEST
+class ScrolledWidgetsPane : public wxScrolledWindow
+{
+public:
+    ScrolledWidgetsPane(wxWindow* parent, wxWindowID id) : wxScrolledWindow(parent, id)
+    {
+        // the sizer will take care of determining the needed scroll size
+        // (if you don't use sizers you will need to manually set the viewport size)
+        wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
+
+        // add a series of widgets
+        for (int w = 1; w <= 120; w++)
+        {
+            wxButton* b = new wxButton(this, wxID_ANY, wxString::Format(wxT("Button %i"), w));
+            sizer->Add(b, 0, wxALL, 3);
+        }
+
+        this->SetSizer(sizer);
+
+        // this part makes the scrollbars show up
+        this->FitInside(); // ask the sizer about the needed size
+        this->SetScrollRate(5, 5);
+    }
+
+};
+
 using json = nlohmann::json;
 
 const wxColour darkPurple = wxColour(113, 96, 232, 100);
@@ -248,7 +274,7 @@ void MainFrame::OnCloseWindow(wxCloseEvent& event) {
 // # ------------------------------------------------------------------------------------------ Logic
 
 void MainFrame::LoadPageContent(std::string page) { // change title code but I cba
-    if (page == "Home") {
+    if (page == "Home") { // DONE FOR NOW
         wxStaticText* titleText = RayUtils::CreateCenteredText(rightPanel, 01, "RayLauncher", 20, 30, true, RayUtils::Window::MAIN);
         titleText->SetBackgroundColour(wxColour(0x55395d));
 
@@ -260,7 +286,8 @@ void MainFrame::LoadPageContent(std::string page) { // change title code but I c
             });
     }
 
-    else if (page == "Account ID Lookup") { // BACKEND
+    else if (page == "Account ID Lookup") {
+        // Keep existing top controls
         wxChoice* accountsDropdown = new wxChoice(rightPanel, 11, wxPoint(10, 5), wxSize(225, 25));
         MainFrame::FillDropdownWithAccounts(accountsDropdown);
 
@@ -269,6 +296,43 @@ void MainFrame::LoadPageContent(std::string page) { // change title code but I c
 
         RoundedButton* logicButton = new RoundedButton(rightPanel, 13, "Lookup", wxPoint((10 + 225 + 10) + (153 - 63), 5 + 35), wxSize(125, 25), darkPurple);
         logicButton->Bind(wxEVT_BUTTON, &MainFrame::OnButtonClicked, this);
+
+        // Create scrolled window for buttons
+        wxScrolledWindow* scrolledWindow = new wxScrolledWindow(rightPanel, wxID_ANY,
+            wxPoint(10, 75),  // Position below existing controls
+            wxSize(540, 480)  // Adjust size as needed
+        );
+
+        // Create a vertical sizer for the scrolled window
+        wxBoxSizer* scrollSizer = new wxBoxSizer(wxVERTICAL);
+
+        // Add 30 RoundedButtons
+        for (int i = 1; i <= 20; i++) {
+            RoundedButton* btn = new RoundedButton(
+                scrolledWindow,             // Parent is scrolled window
+                wxID_ANY,                   // ID
+                wxString::Format("Button %d", i), // Label
+                wxDefaultPosition,          // Position handled by sizer
+                wxSize(500, 25),           // Size of each button
+                darkPurple                  // Using your existing color
+            );
+            btn->Bind(wxEVT_BUTTON, &MainFrame::OnButtonClicked, this);
+
+            // Add button to sizer with some spacing
+            scrollSizer->Add(btn, 0, wxALL | wxEXPAND, 5);
+        }
+
+        // Set the sizer for the scrolled window
+        scrolledWindow->SetSizer(scrollSizer);
+
+        // Calculate the total size needed
+        scrolledWindow->FitInside();  // Tell the scrolled window to calculate the total size
+
+        // Set the scroll rate (in pixels per scroll unit)
+        scrolledWindow->SetScrollRate(0, 20);  // Vertical scrolling only
+
+        // Set background color for the scrolled window
+        scrolledWindow->SetBackgroundColour(darkColour);
     }
 
     else if (page == "Account Settings") { // DONE
@@ -337,26 +401,26 @@ void MainFrame::LoadPageContent(std::string page) { // change title code but I c
 
 void MainFrame::Logic(int id) {
     switch (id) {
-    case 22:
-        wxChoice * dropdown = (wxChoice*)wxChoice::FindWindowById(21);
-        if (dropdown->GetSelection() == -1) {
-            wxMessageBox("Please select an account!", "RayLauncher - Account Settings", wxICON_WARNING);
-        }
-        else {
-            std::string account_id = JSON::GetIdFromUsername((std::string)dropdown->GetStringSelection(), JSON::File::ACCOUNTS);
-            std::string bearer_token = Web::GetToken(account_id);
-            if (bearer_token.find("Error") != std::string::npos) {
-                wxMessageBox("Error - Please select a different account, \nor re-login with the selected account", "RayLauncher - Account Settings", wxICON_ERROR);
-                break;
+        case 22:
+            wxChoice * dropdown = (wxChoice*)wxChoice::FindWindowById(21);
+            if (dropdown->GetSelection() == -1) {
+                wxMessageBox("Please select an account!", "RayLauncher - Account Settings", wxICON_WARNING);
             }
-            std::string exchange_code = Web::GetExchangeCodeWithBearer(bearer_token);
-            if (exchange_code.find("Error") != std::string::npos) {
-                wxMessageBox("Error - this shouldn't have happened! \nPlease open an issue at \nhttps://github.com/NoahSheppard/RayLauncher\nAnd say: \"MainFrame.cpp, switch 22, second if\"", "RayLauncher - Account Settings", wxICON_ERROR);
-                break;
+            else {
+                std::string account_id = JSON::GetIdFromUsername((std::string)dropdown->GetStringSelection(), JSON::File::ACCOUNTS);
+                std::string bearer_token = Web::GetToken(account_id);
+                if (bearer_token.find("Error") != std::string::npos) {
+                    wxMessageBox("Error - Please select a different account, \nor re-login with the selected account", "RayLauncher - Account Settings", wxICON_ERROR);
+                    break;
+                }
+                std::string exchange_code = Web::GetExchangeCodeWithBearer(bearer_token);
+                if (exchange_code.find("Error") != std::string::npos) {
+                    wxMessageBox("Error - this shouldn't have happened! \nPlease open an issue at \nhttps://github.com/NoahSheppard/RayLauncher\nAnd say: \"MainFrame.cpp, switch 22, second if\"", "RayLauncher - Account Settings", wxICON_ERROR);
+                    break;
+                }
+                wxLaunchDefaultBrowser("https://www.epicgames.com/id/exchange?exchangeCode=" + exchange_code);
             }
-            wxLaunchDefaultBrowser("https://www.epicgames.com/id/exchange?exchangeCode=" + exchange_code);
-        }
-        break;
+            break;
     }
 }
 
