@@ -453,6 +453,7 @@ void MainFrame::Logic(int id) {
 			switchName = "None linked.";
         }
        
+        wxLogStatus((wxString)displayName + psnName + xblName + switchName);
 
         // get id 14 of a wxScrollWindow
 		wxScrolledWindow* scrolledWindow = (wxScrolledWindow*)wxScrolledWindow::FindWindowById(14);
