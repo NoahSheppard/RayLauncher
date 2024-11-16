@@ -10,8 +10,4 @@
   - Create a new Pull Request
 
   ### License
-  This project is licensed under the following terms:
-  - Free to use for personal projects.
-  - Must include this license and a mention of the author if distributed.
-  - NO COMMERCIAL USE.
-  - CODE IS PROVIDED AS IS, WITHOUT WARRANTY OF ANY KIND.
+  This project is licensed under the Apache 2.0 guidelines
