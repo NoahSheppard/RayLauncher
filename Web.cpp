@@ -29,32 +29,52 @@ std::string Web::Request(const std::string url, const std::string body, const st
         for (std::string header : headers) {
             rheaders = curl_slist_append(rheaders, header.c_str());
         }
+
         curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
         curl_easy_setopt(curl, CURLOPT_HTTPHEADER, rheaders);
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);
 
+        // Make sure we're setting the correct HTTP method
         if (type == Web::RequestType::POST) {
-            curl_easy_setopt(curl, CURLOPT_POSTFIELDS, body.c_str());
             curl_easy_setopt(curl, CURLOPT_POST, 1L);
+            if (!body.empty()) {
+                curl_easy_setopt(curl, CURLOPT_POSTFIELDS, body.c_str());
+            }
         }
         else if (type == Web::RequestType::GET) {
-            curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "GET");
-        }
-        else {
-            return "Error: Invalid function call";
+            curl_easy_setopt(curl, CURLOPT_HTTPGET, 1L);
         }
 
+        // Store request details for debugging
+        std::string debug_info = "URL: " + url + "\n\n";
+        debug_info += "Request Type: " + std::string(type == Web::RequestType::POST ? "POST" : "GET") + "\n";
+        debug_info += "Headers:\n";
+        for (const auto& header : headers) {
+            debug_info += header + "\n";
+        }
+        if (!body.empty()) {
+            debug_info += "\nBody: " + body + "\n";
+        }
 
         CURLcode res = curl_easy_perform(curl);
+        long http_code = 0;
+        curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_code);
+
+        debug_info += "\nResponse Code: " + std::to_string(http_code) + "\n";
+        debug_info += "Response: " + response + "\n";
         if (res != CURLE_OK) {
-            response = "Error: " + std::string(curl_easy_strerror(res));
+            debug_info += "CURL Error: " + std::string(curl_easy_strerror(res)) + "\n";
         }
+
+        JSON::WriteDebugToFile("C:\\Users\\Noah\\Desktop\\request_debug.txt", debug_info);
 
         curl_slist_free_all(rheaders);
         curl_easy_cleanup(curl);
     }
-    catch (const std::exception& e) { return "Error: Exception caught - " + std::string(e.what()); }
+    catch (const std::exception& e) {
+        return "Error: Exception caught - " + std::string(e.what());
+    }
 
     return response;
 }
@@ -64,7 +84,22 @@ std::string Web::POSTRequest(const std::string url, const std::string body, cons
 }
 
 std::string Web::GETRequest(const std::string url, const std::list<std::string> headers) {
-    return Web::Request(url, "", headers, Web::RequestType::GET);
+    // Log the request details before making it
+    std::string debug_info = "GET Request Details:\n";
+    debug_info += "URL: " + url + "\n\n";
+    debug_info += "Headers:\n";
+    for (const auto& header : headers) {
+        debug_info += header + "\n";
+    }
+    JSON::WriteDebugToFile("C:\\Users\\Noah\\Desktop\\pre_request_debug.txt", debug_info);
+
+    std::string response = Web::Request(url, "", headers, Web::RequestType::GET);
+
+    // Log the response
+    debug_info = "GET Response:\n" + response + "\n";
+    JSON::WriteDebugToFile("C:\\Users\\Noah\\Desktop\\post_request_debug.txt", debug_info);
+
+    return response;
 }
 
 std::string Web::Login(std::string code) {
@@ -93,15 +128,53 @@ std::string Web::GetToken(std::string account_id) {
         std::string username = JSON::GetAccountUsername(account_id, JSON::File::ACCOUNTS);
         std::string deviceId = JSON::GetAccountInformation(account_id, JSON::File::ACCOUNTS)["deviceId"];
         std::string secret = JSON::GetAccountInformation(account_id, JSON::File::ACCOUNTS)["secret"];
-        std::list<std::string> headers = { "Content-Type: application/x-www-form-urlencoded", "Authorization: Basic YWY0M2RjNzFkZDkxNDUyMzk2ZmNkZmZiZDdhOGU4YTk6NFlYdlNFQkxGUlBMaDFoekdaQWtmT2k1bXF1cEZvaFo=", "User-Agent: RayLauncher" };
+
+        // Debug the input values
+        std::string debug_info = "Account ID: " + account_id + "\n";
+        debug_info += "Username: " + username + "\n";
+        debug_info += "Device ID: " + deviceId + "\n";
+        debug_info += "Secret length: " + std::to_string(secret.length()) + "\n";
+
+        std::list<std::string> headers = {
+            "Content-Type: application/x-www-form-urlencoded",
+            "Authorization: Basic YWY0M2RjNzFkZDkxNDUyMzk2ZmNkZmZiZDdhOGU4YTk6NFlYdlNFQkxGUlBMaDFoekdaQWtmT2k1bXF1cEZvaFo=",
+            "User-Agent: RayLauncher",
+            "Accept: */*"  // Added Accept header
+        };
+
         std::string body = "grant_type=device_auth&account_id=" + account_id + "&device_id=" + deviceId + "&secret=" + secret;
+        debug_info += "Request Body: " + body + "\n";
+
+        // Log headers
+        debug_info += "\nHeaders:\n";
+        for (const auto& header : headers) {
+            debug_info += header + "\n";
+        }
+
         std::string response = Web::POSTRequest("https://account-public-service-prod.ol.epicgames.com/account/api/oauth/token", body, headers);
+        debug_info += "\nRaw Response: " + response + "\n";
+
+        // Remove backslashes from response
         response.erase(std::remove(response.begin(), response.end(), '\\'), response.end());
-        nlohmann::json jsonObj = nlohmann::json::parse(response);
-        return jsonObj["access_token"];
+        debug_info += "Cleaned Response: " + response + "\n";
+
+        JSON::WriteDebugToFile("C:\\Users\\Noah\\Desktop\\token_debug.txt", debug_info);
+
+        try {
+            nlohmann::json jsonObj = nlohmann::json::parse(response);
+            if (jsonObj.contains("access_token")) {
+                return jsonObj["access_token"];
+            }
+            else {
+                return "Error: No access token in response - " + response;
+            }
+        }
+        catch (const nlohmann::json::parse_error& e) {
+            return "Error: JSON parse failed - " + std::string(e.what()) + " - Raw response: " + response;
+        }
     }
     catch (const std::exception& e) {
-        return "Error: Re-login, or open issue at github.com/NoahSheppard/RayLauncher";
+        return "Error: Exception caught - " + std::string(e.what());
     }
 }
 

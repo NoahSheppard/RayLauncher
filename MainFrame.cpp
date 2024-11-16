@@ -31,6 +31,7 @@ const wxColour darkColour = wxColour(0x0a0a0a);
 wxPanel* rightPanel;
 wxBoxSizer* rightSizer;
 wxWindow* WINDOW;
+wxBoxSizer* oneScrollSizer;
 
 bool MainFrame::accountsWindowOpen = false;
 bool MainFrame::creditsWindowOpen = false;
@@ -54,6 +55,7 @@ const std::list<std::string> buttonMap = {
     "1_1", // 1_dropdown
     "1_2", // 1_search
     "1_3", // 1_lookup_button
+	"1_4", // 1_scroll_window
 
     "2_1", // 2_dropdown
     "2_2", // 2_open_settings_button
@@ -277,19 +279,17 @@ void MainFrame::LoadPageContent(std::string page) { // change title code but I c
         RoundedButton* logicButton = new RoundedButton(rightPanel, 13, "Lookup", wxPoint((10 + 225 + 10) + (153 - 63), 5 + 35), wxSize(125, 25), darkPurple);
         logicButton->Bind(wxEVT_BUTTON, &MainFrame::OnButtonClicked, this);
 
-        wxScrolledWindow* scrolledWindow = new wxScrolledWindow(rightPanel, wxID_ANY, wxPoint(10, 75), wxSize(540, 480));
-        wxBoxSizer* scrollSizer = new wxBoxSizer(wxVERTICAL);
+        wxScrolledWindow* scrolledWindow = new wxScrolledWindow(rightPanel, 14, wxPoint(10, 75), wxSize(540, 480));
+        oneScrollSizer = new wxBoxSizer(wxVERTICAL);
+        scrolledWindow->SetBackgroundColour(lightColour);
+        scrolledWindow->Hide();
+
 
         for (int i = 1; i <= 20; i++) {
             RoundedButton* btn = new RoundedButton( scrolledWindow, wxID_ANY, wxString::Format("Button %d", i), wxDefaultPosition, wxSize(500, 25), darkPurple );
             btn->Bind(wxEVT_BUTTON, &MainFrame::OnButtonClicked, this);
-            scrollSizer->Add(btn, 0, wxALL | wxEXPAND, 5);
+            MainFrame::AddItemToScroller(scrolledWindow, btn, oneScrollSizer);
         }
-
-        scrolledWindow->SetSizer(scrollSizer);
-        scrolledWindow->FitInside();
-        scrolledWindow->SetScrollRate(0, 20);
-        scrolledWindow->SetBackgroundColour(darkColour);
     }
 
     else if (page == "Account Settings") { // DONE
@@ -358,28 +358,70 @@ void MainFrame::LoadPageContent(std::string page) { // change title code but I c
 
 void MainFrame::Logic(int id) {
     if (id == 13) {
-        wxChoice* dropdown = (wxChoice*)wxChoice::FindWindowById(11);
+        wxChoice* dropdown = (wxChoice*)wxChoice::FindWindowById(11); // gets dropdown
         bool getUsernameFromDropdown;
-		dropdown->GetSelection() == -1 ? getUsernameFromDropdown = false : getUsernameFromDropdown = true;
-        std::string account_id;
-        std::string loggedInAccountId;
+		dropdown->GetSelection() == -1 ? getUsernameFromDropdown = false : getUsernameFromDropdown = true; // checks if dropdown is selected
+        // this is done to see if the user wants their own account searched, or someone elses
+
+        std::string account_id; std::string loggedInAccountId; // account to check, account used to check (for api, must be auth'd)
+
         if (getUsernameFromDropdown) { 
-            account_id = JSON::GetIdFromUsername((std::string)dropdown->GetStringSelection(), JSON::File::ACCOUNTS); 
+            account_id = JSON::GetIdFromUsername((std::string)dropdown->GetStringSelection(), JSON::File::ACCOUNTS); // gets the id of the account selected, if it is their own
             loggedInAccountId = account_id;
         }
         else { 
-            wxTextCtrl* searchInput = (wxTextCtrl*)wxTextCtrl::FindWindowById(12); account_id = searchInput->GetValue(); 
+            //wxTextCtrl* searchInput = (wxTextCtrl*)wxTextCtrl::FindWindowById(12); 
+			account_id = ((wxTextCtrl*)wxTextCtrl::FindWindowById(12))->GetValue(); // if not, gets the id inputted and sets it to account_id
         }
-        std::vector<std::string> accounts = JSON::GetAllUsers();
+
+        std::vector<std::string> accounts = JSON::GetAllUsers();// gets all accounts
         if (accounts.size() == 0) {
-			wxMessageBox("No accounts found!", "RayLauncher - Account ID Lookup", wxICON_WARNING);
+			wxMessageBox("No accounts found!", "RayLauncher - Account ID Lookup", wxICON_WARNING); // if none, error as we need to be auth'd
             return;
 		}
         else {
-			loggedInAccountId = accounts[0];
+			loggedInAccountId = accounts[0]; // if acc.exists, set the first account to be the one used to auth as it really doesn't matter, it wont change anything
         }
-        std::string bearer_token = Web::GetToken(loggedInAccountId);
-        if (bearer_token.find("Error") != std::string::npos) { wxMessageBox("Error - Please select a different account, \nor re-login with the selected account", "RayLauncher - Account Settings", wxICON_ERROR); }
+
+        std::string bearer_token = Web::GetToken(loggedInAccountId); // get a beaer
+        wxLogStatus((wxString)bearer_token);
+        if (bearer_token.find("Error") != std::string::npos) { wxMessageBox("Error - Please select a different account, \nor re-login with the selected account", "RayLauncher - Account Settings", wxICON_ERROR); /**/ return; } // uh oh, return;
+        
+        // now, we need to send a request to get account info
+        //let acc = await axios.get('https://account-public-service-prod.ol.epicgames.com/account/api/public/account?accountId='+input,
+        //{
+        //    'Authorization': 'bearer ' + token,
+        //        'Content-Type' : 'application/json'
+        //}
+        //);
+        // do this now
+        std::list<std::string> headers = {
+    "Authorization: bearer " + bearer_token,
+    "Content-Type: application/json"
+        };
+
+        // Add debug to see exactly what's being sent
+        wxLogStatus((wxString)"Request URL: https://account-public-service-prod.ol.epicgames.com/account/api/public/account?accountId=" + account_id);
+        wxLogStatus((wxString)"Bearer Token: " + bearer_token);
+
+        std::string informationRawData = Web::GETRequest("https://account-public-service-prod.ol.epicgames.com/account/api/public/account?accountId=" + account_id, headers);
+
+        // Log the raw response
+        wxLogStatus((wxString)"Raw response: " + informationRawData);
+
+        // Try parsing even if empty to see if there's an error
+        try {
+            nlohmann::json informationJson = nlohmann::json::parse(informationRawData);
+            JSON::WriteDebugToFile("C:\\Users\\Noah\\Desktop\\debug.json", informationJson);
+            wxLogStatus((wxString)"Parsed JSON: " + informationJson.dump());
+        }
+        catch (const nlohmann::json::parse_error& e) {
+            wxLogStatus((wxString)"JSON parse error: " + std::string(e.what()));
+        }
+
+        // Log both the bearer token and raw data for comparison
+        wxLogStatus((wxString)"Bearer token: " + bearer_token);
+        wxLogStatus((wxString)"Raw response: " + informationRawData);
         return;
 	}
 	else if (id == 22) {
@@ -457,6 +499,24 @@ void MainFrame::ShowCreditsDialog(wxWindow* parent) {
 
     dialog->ShowModal();
     dialog->Destroy();
+}
+
+void MainFrame::AddItemToScroller(wxScrolledWindow* scrolledWindow, RoundedButton* button, wxBoxSizer* scrollSizer) {
+    scrollSizer->Add(button, 0, wxALL | wxEXPAND, 5);
+	scrolledWindow->SetSizer(scrollSizer);
+	scrolledWindow->FitInside();
+	scrolledWindow->SetScrollRate(0, 20);
+	scrolledWindow->SetBackgroundColour(lightColour);
+    scrolledWindow->Show();
+}
+
+void MainFrame::AddItemToScroller(wxScrolledWindow* scrolledWindow, wxStaticText* text, wxBoxSizer* scrollSizer) {
+    scrollSizer->Add(text, 0, wxALL | wxEXPAND, 5);
+	scrolledWindow->SetSizer(scrollSizer);
+	scrolledWindow->FitInside();
+	scrolledWindow->SetScrollRate(0, 20);
+	scrolledWindow->SetBackgroundColour(lightColour);
+    scrolledWindow->Show();
 }
 
 
