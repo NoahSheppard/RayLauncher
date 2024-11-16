@@ -371,6 +371,11 @@ void MainFrame::Logic(int id) {
         }
         else { 
             //wxTextCtrl* searchInput = (wxTextCtrl*)wxTextCtrl::FindWindowById(12); 
+            std::string tbd = (std::string)((wxTextCtrl*)wxTextCtrl::FindWindowById(12))->GetValue();
+            if (tbd.length() != 32) {
+				wxMessageBox("Please enter a valid account ID!", "RayLauncher - Account ID Lookup", wxICON_WARNING);
+				return;
+            }
 			account_id = ((wxTextCtrl*)wxTextCtrl::FindWindowById(12))->GetValue(); // if not, gets the id inputted and sets it to account_id
         }
 
