@@ -352,6 +352,7 @@ void MainFrame::LoadPageContent(std::string page) { // change title code but I c
 
 void MainFrame::Logic(int id) {
     if (id == 13) {
+		oneScrollSizer->Clear(true);
         //see if the user wants their own account searched, or someone elses
         wxChoice* dropdown = (wxChoice*)wxChoice::FindWindowById(11); 
         bool getUsernameFromDropdown;
@@ -453,14 +454,13 @@ void MainFrame::Logic(int id) {
 			switchName = "None linked.";
         }
        
-        wxLogStatus((wxString)displayName + psnName + xblName + switchName);
 
-        // get id 14 of a wxScrollWindow
+        // Parse data aand add it to window
 		wxScrolledWindow* scrolledWindow = (wxScrolledWindow*)wxScrolledWindow::FindWindowById(14);
-        wxStaticText* displayNameText = RayUtils::CreateCenteredText(scrolledWindow, wxID_ANY, "Display Name: " + displayName, 0, 20, false, RayUtils::Window::MAIN);
-		wxStaticText* psnNameText = RayUtils::CreateCenteredText(scrolledWindow, wxID_ANY, "PSN Name: " + psnName, 0, 20, false, RayUtils::Window::MAIN);
-		wxStaticText* xblNameText = RayUtils::CreateCenteredText(scrolledWindow, wxID_ANY, "XBL Name: " + xblName, 0, 20, false, RayUtils::Window::MAIN);
-		wxStaticText* switchText = RayUtils::CreateCenteredText(scrolledWindow, wxID_ANY, "Switch Name: " + switchName, 0, 20, false, RayUtils::Window::MAIN);
+        wxStaticText* displayNameText = RayUtils::CreateCenteredText(scrolledWindow, wxID_ANY, "Display Name: " + displayName, 0, 14, false, RayUtils::Window::MAIN);
+		wxStaticText* psnNameText = RayUtils::CreateCenteredText(scrolledWindow, wxID_ANY, "PSN Name: " + psnName, 0, 14, false, RayUtils::Window::MAIN);
+		wxStaticText* xblNameText = RayUtils::CreateCenteredText(scrolledWindow, wxID_ANY, "XBL Name: " + xblName, 0, 14, false, RayUtils::Window::MAIN);
+		wxStaticText* switchText = RayUtils::CreateCenteredText(scrolledWindow, wxID_ANY, "Switch Name: " + switchName, 0, 14, false, RayUtils::Window::MAIN);
 
 		MainFrame::AddItemToScroller(scrolledWindow, displayNameText, oneScrollSizer);
 		MainFrame::AddItemToScroller(scrolledWindow, psnNameText, oneScrollSizer);
@@ -468,39 +468,121 @@ void MainFrame::Logic(int id) {
 		MainFrame::AddItemToScroller(scrolledWindow, switchText, oneScrollSizer);
 		scrolledWindow->Show();
 
-
-        headers = {
+        if (getUsernameFromDropdown) {
+            headers = {
             "Authorization: bearer " + bearer_token,
             "Content-Type: application/json"
-        };
+            };
 
-		std::string advancedRawInformation = Web::GETRequest("https://account-public-service-prod.ol.epicgames.com/account/api/public/account/displayName/" + displayName, headers);
-		nlohmann::json advancedInformation;
-        try {
-			advancedInformation = nlohmann::json::parse(advancedRawInformation);
-        } 
-		catch (const nlohmann::json::parse_error& e) {
-			wxMessageBox(
-                "JSON Error: \n" + std::string(e.what()), 
-                "RayLauncher - Account Settings", 
-                wxICON_ERROR
-            );
-			return;
-		}
+            std::string advancedRawInformation = Web::GETRequest("https://account-public-service-prod.ol.epicgames.com/account/api/public/account/displayName/" + displayName, headers);
+            nlohmann::json advancedInformation;
+            try {
+                advancedInformation = nlohmann::json::parse(advancedRawInformation);
+            }
+            catch (const nlohmann::json::parse_error& e) {
+                wxMessageBox(
+                    "JSON Error: \n" + std::string(e.what()),
+                    "RayLauncher - Account Settings",
+                    wxICON_ERROR
+                );
+                return;
+            }
 
-        JSON::WriteDebugToFile("C:\\Users\\Noah\\Desktop\\debug_3.json", advancedInformation);
+            JSON::WriteDebugToFile("C:\\Users\\Noah\\Desktop\\debug_3.json", advancedInformation);
 
-        std::string country;
-		std::string lastDisplayNameChange;
-		std::string numberOfDisplayNameChanges;
-        std::string email;
-        std::string preferredLanguage;
-        std::string lastLogin;
-        std::string firstName;
-		std::string lastName;
-        std::string phoneNumber;
-        std::string age;
-        std::string;
+            std::string country;
+            std::string lastDisplayNameChange;
+            std::string numberOfDisplayNameChanges;
+            std::string email;
+            std::string preferredLanguage;
+            std::string lastLogin;
+            std::string firstName;
+            std::string lastName;
+            std::string phoneNumber;
+
+			try {
+				country = advancedInformation["country"];
+			}
+            catch (std::exception e) {
+                country = "None detected.";
+            }
+
+            try {
+				lastDisplayNameChange = advancedInformation["lastDisplayNameChange"];
+			}
+			catch (std::exception e) {
+				lastDisplayNameChange = "None detected.";
+			}
+
+            try {
+				numberOfDisplayNameChanges = advancedInformation["numberOfDisplayNameChanges"];
+            }
+            catch (std::exception e){
+				numberOfDisplayNameChanges = "None detected.";
+            }
+
+            try {
+				email = advancedInformation["email"];
+			}
+			catch (std::exception e) {
+				email = "None detected.";
+			}
+
+            try {
+				preferredLanguage = advancedInformation["preferredLanguage"];
+			}
+			catch (std::exception e) {
+				preferredLanguage = "None detected.";
+			}
+
+            try {
+				lastLogin = advancedInformation["lastLogin"];
+            }
+			catch (std::exception e) {
+				lastLogin = "None detected.";
+			}
+
+            try {
+				firstName = advancedInformation["firstName"];
+			}
+			catch (std::exception e) {
+				firstName = "None detected.";
+			}
+
+            try {
+                lastName = advancedInformation["lastName"];
+			}
+			catch (std::exception e) {
+				lastName = "None detected.";
+            }
+
+            try {
+				phoneNumber = advancedInformation["phoneNumber"];
+			}
+			catch (std::exception e) {
+				phoneNumber = "None linked.";
+			}
+
+			wxStaticText* countryText = RayUtils::CreateCenteredText(scrolledWindow, wxID_ANY, "Country: " + country, 0, 14, false, RayUtils::Window::MAIN);
+			wxStaticText* lastDisplayNameChangeText = RayUtils::CreateCenteredText(scrolledWindow, wxID_ANY, "Last Display Name Change: " + lastDisplayNameChange, 0, 14, false, RayUtils::Window::MAIN);
+			wxStaticText* numberOfDisplayNameChangesText = RayUtils::CreateCenteredText(scrolledWindow, wxID_ANY, "Number of Display Name Changes: " + numberOfDisplayNameChanges, 0, 14, false, RayUtils::Window::MAIN);
+			wxStaticText* emailText = RayUtils::CreateCenteredText(scrolledWindow, wxID_ANY, "Email: " + email, 0, 14, false, RayUtils::Window::MAIN);
+			wxStaticText* preferredLanguageText = RayUtils::CreateCenteredText(scrolledWindow, wxID_ANY, "Preferred Language: " + preferredLanguage, 0, 14, false, RayUtils::Window::MAIN);
+			wxStaticText* lastLoginText = RayUtils::CreateCenteredText(scrolledWindow, wxID_ANY, "Last Login: " + lastLogin, 0, 14, false, RayUtils::Window::MAIN);
+			wxStaticText* firstNameText = RayUtils::CreateCenteredText(scrolledWindow, wxID_ANY, "First Name: " + firstName, 0, 14, false, RayUtils::Window::MAIN);
+			wxStaticText* lastNameText = RayUtils::CreateCenteredText(scrolledWindow, wxID_ANY, "Last Name: " + lastName, 0, 14, false, RayUtils::Window::MAIN);
+			wxStaticText* phoneNumberText = RayUtils::CreateCenteredText(scrolledWindow, wxID_ANY, "Phone Number: " + phoneNumber, 0, 14, false, RayUtils::Window::MAIN);
+
+			MainFrame::AddItemToScroller(scrolledWindow, countryText, oneScrollSizer);
+			MainFrame::AddItemToScroller(scrolledWindow, lastDisplayNameChangeText, oneScrollSizer);
+			MainFrame::AddItemToScroller(scrolledWindow, numberOfDisplayNameChangesText, oneScrollSizer);
+			MainFrame::AddItemToScroller(scrolledWindow, emailText, oneScrollSizer);
+			MainFrame::AddItemToScroller(scrolledWindow, preferredLanguageText, oneScrollSizer);
+			MainFrame::AddItemToScroller(scrolledWindow, lastLoginText, oneScrollSizer);
+			MainFrame::AddItemToScroller(scrolledWindow, firstNameText, oneScrollSizer);
+			MainFrame::AddItemToScroller(scrolledWindow, lastNameText, oneScrollSizer);
+			MainFrame::AddItemToScroller(scrolledWindow, phoneNumberText, oneScrollSizer);
+        }
         return;
 	}
 	else if (id == 22) {
