@@ -1,6 +1,8 @@
 #pragma once
 #include <wx/wx.h>
 
+class RoundedButton;
+
 class MainFrame : public wxFrame {
 public:
     MainFrame(const wxString& title);
@@ -20,6 +22,9 @@ private:
     void OnCloseWindow(wxCloseEvent& event);
 
     void ShowCreditsDialog(wxWindow* parent);
+    void AddItemToScroller(wxScrolledWindow* scrolledWindow, RoundedButton* button, wxBoxSizer* scrollSizer);
+
+    void AddItemToScroller(wxScrolledWindow* scrolledWindow, wxStaticText* text, wxBoxSizer* scrollSizer);
 
 	void LoadPageContent(std::string page);
     void Logic(int id);

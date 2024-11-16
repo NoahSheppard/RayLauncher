@@ -31,6 +31,20 @@ void JSON::AddAccountToFile(std::string account_id, std::string username, std::s
     outFile.close();
 }
 
+void JSON::WriteDebugToFile(std::string fullFilePath, nlohmann::json jsonData) {
+    std::ifstream inFile(fullFilePath);
+
+    if (inFile.good()) {
+        try { inFile >> jsonData; }
+        catch (const json::parse_error& e) { jsonData = json::object(); }
+        inFile.close();
+    }
+
+    std::ofstream outFile(fullFilePath);
+    outFile << std::setw(4) << jsonData << std::endl;
+    outFile.close();
+}
+
 nlohmann::json JSON::GetAccountInformation(std::string account_id, JSON::File file) {
     json jsonData;
     std::ifstream inFile(file == JSON::File::ACCOUNTS ? "accounts.json" : "");

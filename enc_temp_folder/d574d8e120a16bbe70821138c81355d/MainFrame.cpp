@@ -269,7 +269,7 @@ void MainFrame::LoadPageContent(std::string page) { // change title code but I c
             });
     }
 
-    else if (page == "Account ID Lookup") {  // DONE
+    else if (page == "Account ID Lookup") {
         wxChoice* accountsDropdown = new wxChoice(rightPanel, 11, wxPoint(10, 5), wxSize(225, 25));
         MainFrame::FillDropdownWithAccounts(accountsDropdown);
 
@@ -280,6 +280,7 @@ void MainFrame::LoadPageContent(std::string page) { // change title code but I c
         logicButton->Bind(wxEVT_BUTTON, &MainFrame::OnButtonClicked, this);
 
         wxScrolledWindow* scrolledWindow = new wxScrolledWindow(rightPanel, 14, wxPoint(10, 100), wxSize(540, 380), wxBG_STYLE_TRANSPARENT);
+        //scrolledWindow->SetBackgroundColour(wxTransparentColour);
         oneScrollSizer = new wxBoxSizer(wxVERTICAL);
         scrolledWindow->SetBackgroundColour(lightColour);
         scrolledWindow->Hide();

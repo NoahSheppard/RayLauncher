@@ -13,5 +13,6 @@ public:
     static std::vector<std::string> GetAllUsers();
     static std::string GetAccountUsername(std::string account_id, JSON::File file);
     static std::string GetIdFromUsername(std::string username, JSON::File file);
+    static void WriteDebugToFile(std::string fullFilePath, nlohmann::json jsonData);
 
 };
